@@ -11,7 +11,6 @@ export const auth = betterAuth({
 		enabled: true,
 	},
 	plugins: [
-		// هذا البلجن هو سر الـ Multi-Tenancy في مشروعنا
 		organization({
 			allowUserToCreateOrganization: true, // يتيح للشركات التسجيل
 		}),
