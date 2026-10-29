@@ -27,8 +27,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-	title: 'Lumina HR | Simplify Your Management',
-	description: 'A modern platform for managing company structure, employees, branches, and users.',
+	title: 'Taqfel - تقفيل | Simplify Your Management',
+	description: 'A platform for managing company structure, employees, branches, and users.',
 };
 
 export default async function RootLayout({

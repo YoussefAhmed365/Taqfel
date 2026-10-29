@@ -123,7 +123,7 @@ export function TwoFactorForm() {
               value={digit}
               onChange={(e) => setDigit(i, e.target.value)}
               onKeyDown={(e) => handleKeyDown(i, e)}
-              className="w-11 h-13 sm:w-12 sm:h-14 text-center text-lg font-bold text-[#131b2e] bg-white border border-[#bbcabf] rounded-xl transition-all duration-200 outline-none focus:ring-2 focus:ring-[#006c49]/20 focus:border-[#006c49] hover:border-[#6c7a71]"
+              className="w-11 h-13 sm:w-12 sm:h-14 text-center text-lg font-bold text-[#131b2e] bg-white border border-outline-variant rounded-xl transition-all duration-200 outline-none focus:ring-2 focus:ring-[#006c49]/20 focus:border-[#006c49] hover:border-outline"
               aria-label={`Digit ${i + 1}`}
               autoComplete={i === 0 ? 'one-time-code' : 'off'}
             />
@@ -162,14 +162,14 @@ export function TwoFactorForm() {
           <button
             type="button"
             onClick={handleResend}
-            className="text-[#3c4a42] hover:text-[#006c49] font-medium hover:underline transition-colors"
+            className="text-on-surface-variant hover:text-[#006c49] font-medium hover:underline transition-colors"
           >
             {t.twoFactorResend}
           </button>
-          <span className="text-[#bbcabf]">·</span>
+          <span className="text-outline-variant">·</span>
           <button
             type="button"
-            className="text-[#3c4a42] hover:text-[#006c49] font-medium hover:underline transition-colors"
+            className="text-on-surface-variant hover:text-[#006c49] font-medium hover:underline transition-colors"
           >
             {t.twoFactorAlternative}
           </button>

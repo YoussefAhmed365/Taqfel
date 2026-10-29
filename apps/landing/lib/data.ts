@@ -544,7 +544,7 @@ export const FAQ_ITEMS: Record<'ar' | 'en', FaqItem[]> = {
 export const UI_TEXT = {
   ar: {
     announcement: 'إدارة موارد شركتك وموظفيك بطريقة أبسط',
-    brandName: 'Lumina HR',
+    brandName: 'Taqfel - تقفيل',
     brandSubtitle: 'Enterprise',
     tagline: 'منصة إدارة الموارد البشرية والمؤسسية',
     navHome: 'الرئيسية',
@@ -642,7 +642,7 @@ export const UI_TEXT = {
     popularBadge: 'الأكثر ملاءمة للشركات النامية',
     faqEyebrow: 'إجابات واضحة',
     faqHeadline: 'الأسئلة الشائعة',
-    faqSubtitle: 'كل ما تحتاج لمعرفته حول بدء تنظيم شركتك وفريقك مع Lumina HR.',
+    faqSubtitle: 'كل ما تحتاج لمعرفته حول بدء تنظيم شركتك وفريقك مع Taqfel - تقفيل.',
     finalCtaHeadline: 'ابدأ ببناء شركة أكثر تنظيمًا اليوم.',
     finalCtaDesc: 'خطوة واحدة تفصلك عن تنظيم فريقك وفروعك وتوفير ساعات من العمل الإداري المتكرر.',
     footerDesc:
@@ -654,12 +654,12 @@ export const UI_TEXT = {
     footerTerms: 'شروط الخدمة',
     footerSecurity: 'أمن البيانات',
     footerContact: 'تواصل مع الدعم',
-    footerCopyright: 'جميع الحقوق محفوظة © Lumina HR Enterprise.',
+    footerCopyright: 'جميع الحقوق محفوظة © Taqfel - تقفيل Enterprise.',
     demoWatermark: 'عرض توضيحي - بيانات تجريبية',
   },
   en: {
     announcement: 'A simpler way to manage your company and employees',
-    brandName: 'Lumina HR',
+    brandName: 'Taqfel - تقفيل',
     brandSubtitle: 'Enterprise',
     tagline: 'Enterprise Human Resources & Organization Platform',
     navHome: 'Home',
@@ -757,7 +757,7 @@ export const UI_TEXT = {
     popularBadge: 'Most popular for expanding businesses',
     faqEyebrow: 'Clear Answers',
     faqHeadline: 'Frequently Asked Questions',
-    faqSubtitle: 'Everything you need to know about getting organized with Lumina HR.',
+    faqSubtitle: 'Everything you need to know about getting organized with Taqfel - تقفيل.',
     finalCtaHeadline: 'Start building a more organized company today.',
     finalCtaDesc: 'One simple step to organize your team and branches, saving hours of recurring administrative work.',
     footerDesc:
@@ -769,7 +769,7 @@ export const UI_TEXT = {
     footerTerms: 'Terms of Service',
     footerSecurity: 'Data Security',
     footerContact: 'Contact Support',
-    footerCopyright: 'All rights reserved © Lumina HR Enterprise.',
+    footerCopyright: 'All rights reserved © Taqfel - تقفيل Enterprise.',
     demoWatermark: 'Product Preview — Demo Data',
   },
 };

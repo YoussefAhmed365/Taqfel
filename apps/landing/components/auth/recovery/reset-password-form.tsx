@@ -83,8 +83,8 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
     return (
       <AuthShell width="narrow">
         <div className="text-center space-y-5">
-          <div className="mx-auto w-16 h-16 rounded-full bg-[#ffdad6]/30 flex items-center justify-center">
-            <svg className="w-8 h-8 text-[#ba1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <div className="mx-auto w-16 h-16 rounded-full bg-error-container/30 flex items-center justify-center">
+            <svg className="w-8 h-8 text-error" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
@@ -106,8 +106,8 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
     return (
       <AuthShell width="narrow">
         <div className="text-center space-y-5">
-          <div className="mx-auto w-16 h-16 rounded-full bg-[#ffdad6]/30 flex items-center justify-center">
-            <svg className="w-8 h-8 text-[#ba1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <div className="mx-auto w-16 h-16 rounded-full bg-error-container/30 flex items-center justify-center">
+            <svg className="w-8 h-8 text-error" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>

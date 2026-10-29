@@ -59,8 +59,8 @@ export function AdminForm({ email, onSubmit, onBack }: AdminFormProps) {
   return (
     <div className="space-y-5">
       {/* Show selected email */}
-      <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#f2f3ff] border border-[#dae2fd] text-sm">
-        <svg className="w-4 h-4 text-[#006c49] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-[#dae2fd] text-sm">
+        <svg className="w-4 h-4 text-[#006c49] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         <span className="text-[#131b2e] font-medium" dir="ltr">{email}</span>
@@ -127,8 +127,8 @@ export function AdminForm({ email, onSubmit, onBack }: AdminFormProps) {
       </form>
 
       {/* Privacy note */}
-      <div className="flex items-center justify-center gap-1.5 text-[11px] text-[#6c7a71]">
-        <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+      <div className="flex items-center justify-center gap-1.5 text-[11px] text-outline">
+        <svg className="w-3 h-3 shrink-0" viewBox="0 0 16 16" fill="currentColor">
           <path d="M8 1a4 4 0 00-4 4v2H3a1 1 0 00-1 1v6a1 1 0 001 1h10a1 1 0 001-1V8a1 1 0 00-1-1h-1V5a4 4 0 00-4-4zm2.5 6h-5V5a2.5 2.5 0 015 0v2z" />
         </svg>
         <span>{t.signupPrivacyNote}</span>
@@ -139,7 +139,7 @@ export function AdminForm({ email, onSubmit, onBack }: AdminFormProps) {
         <button
           type="button"
           onClick={onBack}
-          className="text-sm text-[#3c4a42] hover:text-[#131b2e] font-medium hover:underline transition-colors"
+          className="text-sm text-on-surface-variant hover:text-[#131b2e] font-medium hover:underline transition-colors"
         >
           {t.signupBack}
         </button>
