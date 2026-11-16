@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { LanguageProvider } from './contexts/language-context';
+import { LanguageProvider } from './context/language';
 import DashboardPage from './pages/dashboard';
 import './index.css';
 

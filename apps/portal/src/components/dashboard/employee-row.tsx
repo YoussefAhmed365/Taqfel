@@ -1,6 +1,6 @@
 import { IconCircleCheck, IconClock } from '@tabler/icons-react';
 import { Badge } from '../ui/badge';
-import { useLanguage } from '../../contexts/language-context';
+import { useLanguage } from '../../context/language/index';
 import type { EmployeeDemo } from '../../lib/types';
 
 export function EmployeeRow({ employee }: { employee: EmployeeDemo }) {

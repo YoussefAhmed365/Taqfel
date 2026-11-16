@@ -1,16 +1,5 @@
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
-
-type Lang = 'ar' | 'en';
-type Dir = 'rtl' | 'ltr';
-
-interface LanguageContextType {
-  lang: Lang;
-  dir: Dir;
-  toggleLang: () => void;
-  setLang: (lang: Lang) => void;
-}
-
-const LanguageContext = createContext<LanguageContextType | null>(null);
+import { useState, useCallback, useEffect, type ReactNode } from 'react';
+import { LanguageContext, type Lang, type Dir } from './language-context';
 
 /**
  * Detects the preferred language from URL search params, localStorage, or browser settings.
@@ -55,12 +44,4 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       {children}
     </LanguageContext.Provider>
   );
-}
-
-export function useLanguage() {
-  const ctx = useContext(LanguageContext);
-  if (!ctx) {
-    throw new Error('useLanguage must be used within LanguageProvider');
-  }
-  return ctx;
 }

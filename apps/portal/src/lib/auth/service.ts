@@ -52,6 +52,8 @@ export const authService = {
   logout() {
     try {
       localStorage.removeItem(STORAGE_KEY);
-    } catch {}
+    } catch {
+      console.log("Failed to logout in demo session");
+    }
   },
 };

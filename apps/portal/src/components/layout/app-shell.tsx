@@ -8,7 +8,7 @@ import {
   IconBell,
   IconSearch,
 } from '@tabler/icons-react';
-import { useLanguage } from '../../contexts/language-context';
+import { useLanguage } from '../../context/language/index';
 import type { ReactNode } from 'react';
 
 export type NavId = 'dashboard' | 'employees' | 'branches' | 'roles' | 'import' | 'settings';

@@ -13,7 +13,7 @@ import { AppShell, type NavId } from '../components/layout/app-shell';
 import { MetricTile } from '../components/dashboard/metric-tile';
 import { EmployeeRow } from '../components/dashboard/employee-row';
 import { Badge } from '../components/ui/badge';
-import { useLanguage } from '../contexts/language-context';
+import { useLanguage } from '../context/language/index';
 import { authService, type RegisteredCompany } from '../lib/auth/service';
 import type { EmployeeDemo } from '../lib/types';
 
@@ -23,12 +23,10 @@ const LANDING_URL = import.meta.env.VITE_LANDING_URL || 'http://localhost:3000';
 export default function DashboardPage() {
   const { lang, toggleLang } = useLanguage();
   const [activeTab, setActiveTab] = useState<'overview' | 'employees' | 'branches'>('overview');
-  const [company, setCompany] = useState<RegisteredCompany | null>(null);
+  const [company] = useState<RegisteredCompany | null>(() => {
+    return authService.getRegisteredCompany();
+  });
   const [isFullscreen, setIsFullscreen] = useState(false);
-
-  useEffect(() => {
-    setCompany(authService.getRegisteredCompany());
-  }, []);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
