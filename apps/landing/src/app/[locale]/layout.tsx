@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import type { Language } from '../../../lib/types';
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
 	subsets: ['arabic'],
@@ -40,7 +41,7 @@ export default async function RootLayout({
 }) {
 	const locale = (await params).locale;
 
-	if (!routing.locales.includes(locale as any)) {
+	if (!routing.locales.includes(locale as Language)) {
 		notFound();
 	}
 

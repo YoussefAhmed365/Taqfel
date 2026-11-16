@@ -10,14 +10,13 @@ import {
   MockupBranchItem,
 } from './mockup-primitives';
 import { IconPhoto } from '@tabler/icons-react';
-import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 
 const DESIGN_WIDTH = 1040;
 const FALLBACK_HEIGHT = 650;
 
 export function DashboardPreview() {
-  const { lang, dir, t, metrics, employees, branches } = useLanguage();
+  const { lang, dir, metrics, employees, branches } = useLanguage();
   const [activeTab, setActiveTab] = useState<'overview' | 'employees' | 'branches'>('overview');
 
   // Mobile scale-as-image architecture
@@ -110,7 +109,7 @@ export function DashboardPreview() {
           >
             <MockupAppShell
               activeNav="dashboard"
-              companyName={lang === 'ar' ? 'شركة لومينا للتقنية والخدمات ش.م.م' : 'Lumina Tech & Services SAE'}
+              companyName={lang === 'ar' ? 'شركة تقفيل للتقنية والخدمات ش.م.م' : 'Taqfel Tech & Services SAE'}
             >
               {/* Dashboard Header Bar */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 pb-4 border-b border-surface-dim">

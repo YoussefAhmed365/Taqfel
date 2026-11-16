@@ -18,7 +18,7 @@ interface AdminFormProps {
 }
 
 export function AdminForm({ email, onSubmit, onBack }: AdminFormProps) {
-  const { t, lang, dir } = useAuthLanguage();
+  const { t, lang } = useAuthLanguage();
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

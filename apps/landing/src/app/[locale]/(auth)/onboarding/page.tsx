@@ -49,7 +49,7 @@ function OnboardingFlow() {
 
   const handleGoToDashboard = useCallback(() => {
     const portalUrl = process.env.NEXT_PUBLIC_PORTAL_URL || 'http://localhost:5174';
-    window.location.href = `${portalUrl}?lang=${lang}`;
+    window.open(`${portalUrl}?lang=${lang}`, '_self');
   }, [lang]);
 
 

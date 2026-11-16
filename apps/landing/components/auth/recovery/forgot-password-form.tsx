@@ -7,9 +7,11 @@ import { AuthInput } from '../../ui/auth-input';
 import { AuthButton } from '../../ui/auth-button';
 import { validateEmailOnly } from '../../../lib/auth/validation';
 import { authService } from '../../../lib/auth/service';
+import { useRouter } from 'next/navigation';
 
 export function ForgotPasswordForm() {
   const { t, lang } = useAuthLanguage();
+  const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -57,7 +59,7 @@ export function ForgotPasswordForm() {
             <button
               type="button"
               onClick={() => {
-                window.location.href = `/${lang}/reset-password?token=valid`;
+                router.push(`/${lang}/reset-password?token=valid`);
               }}
               className="w-full py-2.5 px-3 rounded-xl bg-[#006c49] text-white text-xs font-semibold hover:bg-on-primary-fixed-variant transition-colors shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
             >

@@ -4,9 +4,12 @@ import React, { useState } from 'react';
 import { useLanguage } from '../../components/home/language-context';
 import { Button } from '../../components/ui/button';
 import { IconGlobe, IconMenu, IconX } from '@tabler/icons-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export function Navbar() {
   const { lang, toggleLang, t } = useLanguage();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -24,7 +27,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <a href="#" className="flex items-center gap-2.5 group">
               <div className="w-9 h-9 rounded-xl bg-[#006c49] text-white flex items-center justify-center font-bold shadow-xs transition-transform group-hover:scale-105">
-                <span className="text-base tracking-tighter">L</span>
+                <span className="text-base tracking-tighter">T</span>
               </div>
               <div className="flex flex-col text-start">
                 <span className="text-base sm:text-lg font-bold text-[#131b2e] tracking-tight leading-none">
@@ -64,12 +67,12 @@ export function Navbar() {
             </button>
 
             {/* Login Link */}
-            <a
+            <Link
               href={`/${lang}/login`}
               className="text-xs font-semibold text-on-surface-variant hover:text-[#131b2e] px-3 py-2 rounded-lg hover:bg-surface-container-low transition-colors"
             >
               {t.navLogin}
-            </a>
+            </Link>
 
             {/* Primary CTA */}
             <Button
@@ -77,7 +80,7 @@ export function Navbar() {
               variant="primary"
               className="font-semibold text-xs px-4"
               onClick={() => {
-                window.location.href = `/${lang}/signup`;
+                router.push(`/${lang}/signup`);
               }}
             >
               {t.ctaPrimary}
@@ -124,18 +127,18 @@ export function Navbar() {
             ))}
           </div>
           <div className="pt-3 border-t border-surface-dim flex flex-col gap-2">
-            <a
+            <Link
               href={`/${lang}/login`}
               className="text-center py-2 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low rounded-lg"
             >
               {t.navLogin}
-            </a>
+            </Link>
             <Button
               variant="primary"
               className="w-full"
               onClick={() => {
                 setMobileMenuOpen(false);
-                window.location.href = `/${lang}/signup`;
+                router.push(`/${lang}/signup`);
               }}
             >
               {t.ctaPrimary}

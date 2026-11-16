@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { AuthLanguageProvider, useAuthLanguage } from '../../../../../components/auth/auth-language-context';
 import { AuthShell, AuthHeading } from '../../../../../components/auth/auth-shell';
 import { AuthProgress } from '../../../../../components/auth/auth-progress';
@@ -12,6 +13,7 @@ import type { CompanyFormData, AccountFormData } from '../../../../../lib/auth/v
 
 function SignupFlow() {
   const { t, lang } = useAuthLanguage();
+  const router = useRouter();
 
   const [step, setStep] = useState<'company' | 'account'>('company');
   const [companyData, setCompanyData] = useState<CompanyFormData | null>(null);
@@ -35,10 +37,10 @@ function SignupFlow() {
 
       if (response.success) {
         // Redirect to email verification
-        window.location.href = `/${lang}/verify-email?email=${encodeURIComponent(companyData.email)}`;
+        router.push(`/${lang}/verify-email?email=${encodeURIComponent(companyData.email)}`);
       }
     },
-    [companyData, lang]
+    [companyData, lang, router]
   );
 
   const handleBack = useCallback(() => {

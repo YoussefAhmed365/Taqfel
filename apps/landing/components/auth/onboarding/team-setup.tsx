@@ -2,7 +2,6 @@
 
 import { useAuthLanguage } from '../auth-language-context';
 import { AuthHeading } from '../auth-shell';
-import { AuthButton } from '../../ui/auth-button';
 
 interface TeamSetupProps {
   onSelectOption?: (method: 'manual' | 'excel') => void;

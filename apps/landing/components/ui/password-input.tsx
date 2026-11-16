@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import { useState, useCallback } from 'react';
 import { cn } from '../../lib/utils';
 import { AuthInput, type AuthInputProps } from './auth-input';
@@ -59,7 +58,7 @@ export function PasswordInput({
         }
       />
 
-      {showStrength && (props as any).value && (
+      {showStrength && props.value && (
         <div className="space-y-2 animate-fadeIn">
           {/* Strength bar */}
           <div className="flex gap-1">

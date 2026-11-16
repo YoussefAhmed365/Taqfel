@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { AuthLanguageProvider, useAuthLanguage } from '../../../../components/auth/auth-language-context';
 import {
   MockupAppShell,
@@ -22,13 +22,17 @@ import {
 } from '@tabler/icons-react';
 
 function DashboardContent() {
-  const { lang, dir } = useAuthLanguage();
+  const { lang } = useAuthLanguage();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<'overview' | 'employees' | 'branches'>('overview');
   const [company, setCompany] = useState<RegisteredCompany | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
-    setCompany(authService.getRegisteredCompany());
+    const frame = window.requestAnimationFrame(() => {
+      setCompany(authService.getRegisteredCompany());
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -49,15 +53,15 @@ function DashboardContent() {
 
   const handleRestartDemo = () => {
     authService.logout();
-    window.location.href = `/${lang}/signup`;
+    router.push(`/${lang}/signup`);
   };
 
   const handleLogout = () => {
     authService.logout();
-    window.location.href = `/${lang}/login`;
+    router.push(`/${lang}/login`);
   };
 
-  const companyName = company?.companyName || (lang === 'ar' ? 'شركة لومينا للحلول البرمجية' : 'Lumina Tech Solutions');
+  const companyName = company?.companyName || (lang === 'ar' ? 'شركة تقفيل للحلول البرمجية' : 'Taqfel Tech Solutions');
   const branchesList = (company?.branches && company.branches.length > 0)
     ? company.branches
     : (lang === 'ar' ? ['المقر الرئيسي - القاهرة', 'فرع الإسكندرية', 'فرع الجيزة'] : ['HQ - Cairo', 'Alexandria Branch', 'Giza Branch']);

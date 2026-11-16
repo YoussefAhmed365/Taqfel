@@ -63,7 +63,7 @@ export function ValueProposition() {
                       ? (lang === 'ar' ? 'مرونة تنظيمية' : 'Structural Agility')
                       : (lang === 'ar' ? 'توسع مستدام' : 'Scalable Growth')}
               </span>
-              <span className="text-[10px] text-outline/80">Lumina HR Precision</span>
+              <span className="text-[10px] text-outline/80">Taqfel HR Precision</span>
             </div>
           </motion.div>
         ))}

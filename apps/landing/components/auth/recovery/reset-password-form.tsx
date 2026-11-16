@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useCallback, type FormEvent } from 'react';
+import { useState, useCallback, type SubmitEvent } from 'react';
 import { useAuthLanguage } from '../auth-language-context';
 import { AuthShell, AuthHeading } from '../auth-shell';
 import { PasswordInput } from '../../ui/password-input';
 import { AuthButton } from '../../ui/auth-button';
-import { AuthAlert } from '../../ui/auth-alert';
 import { validateResetPasswordForm, checkPasswordStrength } from '../../../lib/auth/validation';
 import { authService } from '../../../lib/auth/service';
+import { useRouter } from 'next/navigation';
 
 type ResetState = 'form' | 'loading' | 'success' | 'expired' | 'invalid';
 
@@ -17,6 +17,7 @@ interface ResetPasswordFormProps {
 
 export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const { t, lang } = useAuthLanguage();
+  const router = useRouter();
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,7 +27,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const strength = checkPasswordStrength(password, lang);
 
   const handleSubmit = useCallback(
-    async (e: FormEvent) => {
+    async (e: SubmitEvent) => {
       e.preventDefault();
       setFieldErrors({});
 
@@ -67,7 +68,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           </div>
           <AuthHeading title={t.resetSuccessTitle} subtitle={t.resetSuccessSubtitle} />
           <AuthButton
-            onClick={() => window.location.href = `/${lang}/login`}
+            onClick={() => router.push(`/${lang}/login`)}
             className="w-full"
             size="lg"
           >
@@ -90,7 +91,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           </div>
           <AuthHeading title={t.resetExpiredTitle} subtitle={t.resetExpiredSubtitle} />
           <AuthButton
-            onClick={() => window.location.href = `/${lang}/forgot-password`}
+            onClick={() => router.push(`/${lang}/forgot-password`)}
             className="w-full"
             size="lg"
           >
@@ -113,7 +114,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           </div>
           <AuthHeading title={t.resetInvalidTitle} subtitle={t.resetInvalidSubtitle} />
           <AuthButton
-            onClick={() => window.location.href = `/${lang}/forgot-password`}
+            onClick={() => router.push(`/${lang}/forgot-password`)}
             className="w-full"
             size="lg"
           >
@@ -142,6 +143,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           strengthScore={strength.score}
           strengthLabel={strength.label}
           strengthChecks={strength.checks}
+          autoFocus
           required
         />
 

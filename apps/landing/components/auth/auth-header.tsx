@@ -1,16 +1,17 @@
 'use client';
 
 import { useAuthLanguage } from './auth-language-context';
+import Link from 'next/link';
 
 export function AuthHeader() {
-  const { t, lang, toggleLang } = useAuthLanguage();
+  const { t, toggleLang } = useAuthLanguage();
 
   return (
     <header className="w-full border-b border-outline-variant/30 bg-white/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2.5 group">
+          <Link href="/" className="flex items-center gap-2.5 group">
             <div className="w-8 h-8 rounded-lg bg-[#006c49] text-white flex items-center justify-center font-bold text-sm shadow-xs transition-transform group-hover:scale-105">
               L
             </div>
@@ -22,7 +23,7 @@ export function AuthHeader() {
                 {t.brandSubtitle}
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Right side: lang switcher + help */}
           <div className="flex items-center gap-2 sm:gap-3">

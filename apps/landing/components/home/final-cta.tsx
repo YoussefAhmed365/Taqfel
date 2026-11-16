@@ -4,9 +4,11 @@ import { useLanguage } from '../../components/home/language-context';
 import { Button } from '../../components/ui/button';
 import { IconArrowLeft, IconArrowRight, IconCircleCheck } from '@tabler/icons-react';
 import { motion } from 'motion/react';
+import { useRouter } from 'next/navigation';
 
 export function FinalCta() {
   const { lang, t, dir } = useLanguage();
+  const router = useRouter();
 
   return (
     <section id="final-cta" className="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,7 +45,7 @@ export function FinalCta() {
               variant="primary"
               className="w-full sm:w-auto font-semibold px-8 shadow-xs hover:shadow-md transition-all duration-200"
               onClick={() => {
-                window.location.href = `/${lang}/signup`;
+                router.push(`/${lang}/signup`);
               }}
             >
               <span>{t.ctaPrimary}</span>

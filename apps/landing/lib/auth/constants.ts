@@ -1,7 +1,7 @@
 export const AUTH_BRAND = {
-  name: 'Lumina HR',
+  name: 'Taqfel HR',
   subtitle: 'Enterprise',
-  domain: 'luminahr.eg',
+  domain: 'Taqfelhr.eg',
 };
 
 export const AUTH_STEPS = [

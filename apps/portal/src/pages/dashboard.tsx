@@ -56,7 +56,7 @@ export default function DashboardPage() {
     window.location.href = `${LANDING_URL}/${lang}/login`;
   };
 
-  const companyName = company?.companyName || (lang === 'ar' ? 'شركة لومينا للحلول البرمجية' : 'Lumina Tech Solutions');
+  const companyName = company?.companyName || (lang === 'ar' ? 'شركة تقفيل للحلول البرمجية' : 'Taqfel Tech Solutions');
   const branchesList = (company?.branches && company.branches.length > 0)
     ? company.branches
     : (lang === 'ar' ? ['المقر الرئيسي - القاهرة', 'فرع الإسكندرية', 'فرع الجيزة'] : ['HQ - Cairo', 'Alexandria Branch', 'Giza Branch']);

@@ -4,7 +4,7 @@
  */
 export const authAr = {
   // Brand
-  brandName: 'Lumina HR',
+  brandName: 'Taqfel HR',
   brandSubtitle: 'Enterprise',
 
   // Language switcher
@@ -157,14 +157,14 @@ export const authAr = {
   // Footer
   footerPrivacy: 'الخصوصية',
   footerTerms: 'الشروط',
-  footerCopyright: '© ٢٠٢٦ Lumina HR. جميع الحقوق محفوظة.',
+  footerCopyright: '© ٢٠٢٦ Taqfel HR. جميع الحقوق محفوظة.',
 
   // Metadata
-  metaLoginTitle: 'تسجيل الدخول | Lumina HR',
-  metaSignupTitle: 'إنشاء حساب شركة | Lumina HR',
-  metaVerifyTitle: 'تأكيد البريد الإلكتروني | Lumina HR',
-  metaForgotTitle: 'استعادة كلمة المرور | Lumina HR',
-  metaResetTitle: 'تعيين كلمة مرور جديدة | Lumina HR',
-  metaTwoFactorTitle: 'التحقق الإضافي | Lumina HR',
-  metaOnboardingTitle: 'إعداد الشركة | Lumina HR',
+  metaLoginTitle: 'تسجيل الدخول | Taqfel HR',
+  metaSignupTitle: 'إنشاء حساب شركة | Taqfel HR',
+  metaVerifyTitle: 'تأكيد البريد الإلكتروني | Taqfel HR',
+  metaForgotTitle: 'استعادة كلمة المرور | Taqfel HR',
+  metaResetTitle: 'تعيين كلمة مرور جديدة | Taqfel HR',
+  metaTwoFactorTitle: 'التحقق الإضافي | Taqfel HR',
+  metaOnboardingTitle: 'إعداد الشركة | Taqfel HR',
 } as const;
