@@ -8,7 +8,8 @@ import {
   IconBell,
   IconSearch,
 } from '@tabler/icons-react';
-import { useLanguage } from '../../context/language/index';
+import { useTranslation } from 'react-i18next';
+import { useLocale } from '../../hooks/use-locale';
 import type { ReactNode } from 'react';
 
 export type NavId = 'dashboard' | 'employees' | 'branches' | 'roles' | 'import' | 'settings';
@@ -38,7 +39,8 @@ export function AppShell({
   actions,
   className = '',
 }: AppShellProps) {
-  const { lang, dir } = useLanguage();
+  const { t } = useTranslation('common');
+  const { lang, dir } = useLocale();
 
   const effectiveCompanyName =
     companyName ||
@@ -60,7 +62,7 @@ export function AppShell({
   return (
     <div
       dir={dir}
-      className={`w-full text-[#131b2e] select-none text-start font-sans h-screen min-h-screen bg-[#faf8ff] flex flex-col overflow-hidden ${className}`}
+      className={`w-full text-[#131b2e] select-none text-start h-screen min-h-screen bg-[#faf8ff] flex flex-col overflow-hidden ${className}`}
     >
       {/* Top Header Bar */}
       <header className="bg-white border-b border-surface-dim px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-4 shrink-0 shadow-2xs">
@@ -73,7 +75,7 @@ export function AppShell({
                 {effectiveCompanyName}
               </span>
               <span className="text-[10px] text-outline font-medium hidden sm:inline">
-                {lang === 'ar' ? 'منظومة إدارة الموارد البشرية' : 'HR Management Platform'}
+                {t('platformSubtitle')}
               </span>
             </div>
           </div>
@@ -84,7 +86,7 @@ export function AppShell({
           <div className="hidden md:flex items-center gap-2 bg-surface-container-low border border-surface-dim rounded-lg px-2.5 py-1 text-xs text-outline w-44 lg:w-56">
             <IconSearch className="w-3.5 h-3.5 shrink-0" />
             <span className="truncate">
-              {lang === 'ar' ? 'بحث عن موظف، فرع، أو قسم...' : 'Search employee, branch...'}
+              {t('searchPlaceholder')}
             </span>
           </div>
 

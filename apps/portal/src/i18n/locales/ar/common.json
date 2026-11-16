@@ -1,0 +1,29 @@
+{
+  "platformSubtitle": "منصة إدارة الموارد البشرية",
+  "searchPlaceholder": "ابحث عن موظف، فرع...",
+  "workspace": "مساحة العمل",
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "employees": "الموظفون",
+    "branches": "الفروع",
+    "roles": "الأدوار والصلاحيات",
+    "import": "استيراد البيانات",
+    "settings": "الإعدادات"
+  },
+  "actions": {
+    "switchLanguage": "Switch to English",
+    "fullscreen": "ملء الشاشة",
+    "exitFullscreen": "إنهاء ملء الشاشة",
+    "resetDemo": "إعادة ضبط التجربة",
+    "logout": "تسجيل الخروج"
+  },
+  "recordHealth": {
+    "title": "جودة السجلات",
+    "verifiedProfiles_zero": "لا توجد ملفات مفعّلة",
+    "verifiedProfiles_one": "ملف واحد مفعّل ونشط",
+    "verifiedProfiles_two": "ملفان مفعّلان ونشطان",
+    "verifiedProfiles_few": "{{count}} ملفات مفعّلة ونشطة",
+    "verifiedProfiles_many": "{{count}} ملفاً مفعّلاً ونشطاً",
+    "verifiedProfiles_other": "{{count}} ملف مفعّل ونشط"
+  }
+}

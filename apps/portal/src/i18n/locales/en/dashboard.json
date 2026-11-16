@@ -1,0 +1,21 @@
+{
+    "activeStaff": "Active Staff Count",
+    "registeredMembers": "Registered members",
+    "complete": "Complete",
+    "operationalBranches": "Operational Branches",
+    "activeLocations": "Active locations",
+    "connected": "Connected",
+    "platformReadiness": "Platform Readiness",
+    "readyToOperate": "Ready to operate",
+    "active": "Active",
+    "headquarters": "Headquarters",
+    "adminName": "Ahmed Mahmoud",
+    "adminRole": "Company Administrator",
+    "executiveManagement": "Executive Management",
+    "hrName": "Sarah Ibrahim",
+    "hrRole": "HR Director",
+    "humanResources": "Human Resources",
+    "operationsName": "Omar El-Shenawy",
+    "operationsRole": "Operations Manager",
+    "operations": "Operations"
+}

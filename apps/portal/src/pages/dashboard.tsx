@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   IconBuilding,
   IconUsers,
@@ -8,20 +8,30 @@ import {
   IconMaximize,
   IconMinimize,
   IconLanguage,
+  IconCircleCheck,
 } from '@tabler/icons-react';
+import { useTranslation } from 'react-i18next';
+import { useLocale } from '../hooks/use-locale';
 import { AppShell, type NavId } from '../components/layout/app-shell';
 import { MetricTile } from '../components/dashboard/metric-tile';
 import { EmployeeRow } from '../components/dashboard/employee-row';
 import { Badge } from '../components/ui/badge';
-import { useLanguage } from '../context/language/index';
 import { authService, type RegisteredCompany } from '../lib/auth/service';
-import type { EmployeeDemo } from '../lib/types';
+import {
+  getDashboardMetrics,
+  getMockEmployees,
+  type DashboardTranslationKey,
+} from '../lib/dashboard-data';
+import { useSearchParams } from 'react-router-dom';
 
 
 const LANDING_URL = import.meta.env.VITE_LANDING_URL || 'http://localhost:3000';
 
 export default function DashboardPage() {
-  const { lang, toggleLang } = useLanguage();
+  const { lang, toggleLang } = useLocale();
+  const { t } = useTranslation('dashboard');
+  const translate = (key: DashboardTranslationKey): string => t(key);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<'overview' | 'employees' | 'branches'>('overview');
   const [company] = useState<RegisteredCompany | null>(() => {
     return authService.getRegisteredCompany();
@@ -59,71 +69,22 @@ export default function DashboardPage() {
     ? company.branches
     : (lang === 'ar' ? ['المقر الرئيسي - القاهرة', 'فرع الإسكندرية', 'فرع الجيزة'] : ['HQ - Cairo', 'Alexandria Branch', 'Giza Branch']);
 
-  const mockMetrics = [
-    {
-      id: 'active_staff',
-      label: lang === 'ar' ? 'إجمالي قوة العمل' : 'Active Staff Count',
-      value: '24',
-      subtext: lang === 'ar' ? 'موظف مسجل' : 'Registered members',
-      badgeText: lang === 'ar' ? 'مكتمل' : 'Complete',
-      variant: 'emerald' as const,
-    },
-    {
-      id: 'branches',
-      label: lang === 'ar' ? 'الفروع التشغيلية' : 'Operational Branches',
-      value: String(branchesList.length),
-      subtext: lang === 'ar' ? 'فروع نشطة' : 'Active locations',
-      badgeText: lang === 'ar' ? 'متصل' : 'Connected',
-      variant: 'lime' as const,
-    },
-    {
-      id: 'system_status',
-      label: lang === 'ar' ? 'جاهزية المنظومة' : 'Platform Readiness',
-      value: '100%',
-      subtext: lang === 'ar' ? 'مهيأة للتشغيل' : 'Ready to operate',
-      badgeText: lang === 'ar' ? 'نشط' : 'Active',
-      variant: 'emerald' as const,
-    },
-  ];
+  const mockMetrics = getDashboardMetrics(lang, branchesList.length, translate);
+  const mockEmployees = getMockEmployees(lang, branchesList, company, translate);
 
-  const mockEmployees: EmployeeDemo[] = [
-    {
-      id: '1',
-      name: company?.fullName || (lang === 'ar' ? 'أحمد محمود العوضي' : 'Ahmed Mahmoud'),
-      role: lang === 'ar' ? 'مدير المنشأة (Super Admin)' : 'Company Administrator',
-      department: lang === 'ar' ? 'الإدارة التنفيذية' : 'Executive Management',
-      branch: branchesList[0] || (lang === 'ar' ? 'المقر الرئيسي' : 'Headquarters'),
-      status: 'active' as const,
-      joinedDate: lang === 'ar' ? 'اليوم' : 'Today',
-      avatarSeed: 'admin',
-    },
-    {
-      id: '2',
-      name: lang === 'ar' ? 'سارة محمد إبراهيم' : 'Sarah Ibrahim',
-      role: lang === 'ar' ? 'مدير الموارد البشرية' : 'HR Director',
-      department: lang === 'ar' ? 'الموارد البشرية' : 'Human Resources',
-      branch: branchesList[0] || (lang === 'ar' ? 'المقر الرئيسي' : 'Headquarters'),
-      status: 'active' as const,
-      joinedDate: '2026-09-15',
-      avatarSeed: 'sarah',
-    },
-    {
-      id: '3',
-      name: lang === 'ar' ? 'عمر فاروق الشناوي' : 'Omar El-Shenawy',
-      role: lang === 'ar' ? 'مدير العمليات التشغيلية' : 'Operations Manager',
-      department: lang === 'ar' ? 'العمليات' : 'Operations',
-      branch: branchesList[1] || branchesList[0] || (lang === 'ar' ? 'المقر الرئيسي' : 'Headquarters'),
-      status: 'active' as const,
-      joinedDate: '2026-09-20',
-      avatarSeed: 'omar',
-    },
-  ];
+  const handleToggleLang = useCallback(() => {
+    const nextLang = lang === 'ar' ? 'en' : 'ar';
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set('lang', nextLang);
+    setSearchParams(nextParams);
+    toggleLang();
+  }, [lang, searchParams, setSearchParams, toggleLang]);
 
   const headerActions = (
     <div className="flex items-center gap-1 sm:gap-2">
       <button
         type="button"
-        onClick={toggleLang}
+        onClick={handleToggleLang}
         title={lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}
         className="p-1.5 text-outline hover:text-[#131b2e] hover:bg-surface-container-low rounded-lg transition-colors flex items-center justify-center cursor-pointer"
       >
@@ -267,19 +228,19 @@ export default function DashboardPage() {
                 </h3>
                 <div className="space-y-3">
                   <div className="flex items-center gap-2.5 text-xs text-[#131b2e]">
-                    <span className="w-5 h-5 rounded-full bg-[#e6f7ef] text-[#006c49] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                    <IconCircleCheck className="w-5 h-5 rounded-full bg-[#e6f7ef] text-[#006c49] shrink-0" aria-hidden="true" />
                     <span>{lang === 'ar' ? 'تم إنشاء حساب المسؤول بنجاح' : 'Admin account created successfully'}</span>
                   </div>
                   <div className="flex items-center gap-2.5 text-xs text-[#131b2e]">
-                    <span className="w-5 h-5 rounded-full bg-[#e6f7ef] text-[#006c49] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                    <IconCircleCheck className="w-5 h-5 rounded-full bg-[#e6f7ef] text-[#006c49] shrink-0" aria-hidden="true" />
                     <span>{lang === 'ar' ? 'تم تأكيد البريد الإلكتروني رسمياً' : 'Official email verified'}</span>
                   </div>
                   <div className="flex items-center gap-2.5 text-xs text-[#131b2e]">
-                    <span className="w-5 h-5 rounded-full bg-[#e6f7ef] text-[#006c49] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                    <IconCircleCheck className="w-5 h-5 rounded-full bg-[#e6f7ef] text-[#006c49] shrink-0" aria-hidden="true" />
                     <span>{lang === 'ar' ? 'تم اعتماد الهيكل التنظيمي والفروع' : 'Structure and branches initialized'}</span>
                   </div>
                   <div className="flex items-center gap-2.5 text-xs text-[#131b2e]">
-                    <span className="w-5 h-5 rounded-full bg-[#f4fce3] text-[#4d7c0f] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                    <IconCircleCheck className="w-5 h-5 rounded-full bg-[#f4fce3] text-[#4d7c0f] shrink-0" aria-hidden="true" />
                     <span>{lang === 'ar' ? 'المنظومة بانتظار اتصال واجهة برمجة التطبيقات (API)' : 'Ready for API backend integration'}</span>
                   </div>
                 </div>

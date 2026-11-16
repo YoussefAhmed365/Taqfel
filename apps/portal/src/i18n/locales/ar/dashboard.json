@@ -1,0 +1,21 @@
+{
+    "activeStaff": "إجمالي قوة العمل",
+    "registeredMembers": "موظف مسجل",
+    "complete": "مكتمل",
+    "operationalBranches": "الفروع التشغيلية",
+    "activeLocations": "فروع نشطة",
+    "connected": "متصل",
+    "platformReadiness": "جاهزية المنظومة",
+    "readyToOperate": "مهيأة للتشغيل",
+    "active": "نشط",
+    "headquarters": "المقر الرئيسي",
+    "adminName": "أحمد محمود العوضي",
+    "adminRole": "مدير المنشأة (Super Admin)",
+    "executiveManagement": "الإدارة التنفيذية",
+    "hrName": "سارة محمد إبراهيم",
+    "hrRole": "مدير الموارد البشرية",
+    "humanResources": "الموارد البشرية",
+    "operationsName": "عمر فاروق الشناوي",
+    "operationsRole": "مدير العمليات التشغيلية",
+    "operations": "العمليات"
+}

@@ -1,10 +1,10 @@
 import { IconCircleCheck, IconClock } from '@tabler/icons-react';
 import { Badge } from '../ui/badge';
-import { useLanguage } from '../../context/language/index';
+import { useLocale } from '../../hooks/use-locale';
 import type { EmployeeDemo } from '../../lib/types';
 
 export function EmployeeRow({ employee }: { employee: EmployeeDemo }) {
-  const { lang } = useLanguage();
+  const { lang } = useLocale();
   return (
     <tr className="border-b border-surface-container-low hover:bg-surface-container-low/60 transition-colors text-xs">
       <td className="py-2.5 px-3">
