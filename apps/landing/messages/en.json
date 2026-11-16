@@ -1,7 +1,7 @@
 {
   "UI_TEXT": {
     "announcement": "A simpler way to manage your company and employees",
-    "brandName": "Lumina HR",
+    "brandName": "Taqfel",
     "brandSubtitle": "Enterprise",
     "tagline": "Enterprise Human Resources & Organization Platform",
     "navHome": "Home",
@@ -108,10 +108,10 @@
     "pricingEyebrow": "Transparent Plans",
     "pricingHeadline": "Choose the plan tailored to your stage of growth",
     "pricingSubtitle": "Clear terms to organize your team without hidden costs or surprises.",
-    "popularBadge": "Most popular for expanding businesses",
+    "popularBadge": "Most popular",
     "faqEyebrow": "Clear Answers",
     "faqHeadline": "Frequently Asked Questions",
-    "faqSubtitle": "Everything you need to know about getting organized with Lumina HR.",
+    "faqSubtitle": "Everything you need to know about getting organized with Taqfel HR.",
     "finalCtaHeadline": "Start building a more organized company today.",
     "finalCtaDesc": "One simple step to organize your team and branches, saving hours of recurring administrative work.",
     "footerDesc": "A modern platform to organize company structures, employees, branches, and internal users for businesses in Egypt and the MENA region.",
@@ -122,7 +122,7 @@
     "footerTerms": "Terms of Service",
     "footerSecurity": "Data Security",
     "footerContact": "Contact Support",
-    "footerCopyright": "All rights reserved © Lumina HR Enterprise.",
+    "footerCopyright": "All rights reserved © Taqfel HR Enterprise.",
     "demoWatermark": "Product Preview — Demo Data"
   },
   "DEMO_METRICS": [

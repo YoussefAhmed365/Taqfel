@@ -33,13 +33,13 @@ export function CompanyStructureStep({ onSelect }: CompanyStructureProps) {
             'hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#006c49]/20',
             selected === 'single'
               ? 'border-[#006c49] bg-[#e6f7ef]/40 shadow-sm'
-              : 'border-[#bbcabf]/50 bg-white hover:border-[#006c49]/40 hover:bg-[#faf8ff]'
+              : 'border-outline-variant/50 bg-white hover:border-[#006c49]/40 hover:bg-[#faf8ff]'
           )}
           aria-pressed={selected === 'single'}
         >
           {/* Selection indicator */}
           {selected === 'single' && (
-            <div className="absolute top-3 end-3">
+            <div className="absolute top-3 inset-e-3">
               <div className="w-5 h-5 rounded-full bg-[#006c49] flex items-center justify-center">
                 <svg className="w-3 h-3 text-white" viewBox="0 0 16 16" fill="currentColor">
                   <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
@@ -61,7 +61,7 @@ export function CompanyStructureStep({ onSelect }: CompanyStructureProps) {
           <h3 className="text-sm font-bold text-[#131b2e] mb-1">
             {t.onboardingSingleTitle}
           </h3>
-          <p className="text-xs text-[#3c4a42] leading-relaxed">
+          <p className="text-xs text-on-surface-variant leading-relaxed">
             {t.onboardingSingleDesc}
           </p>
         </button>
@@ -75,12 +75,12 @@ export function CompanyStructureStep({ onSelect }: CompanyStructureProps) {
             'hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#006c49]/20',
             selected === 'branches'
               ? 'border-[#006c49] bg-[#e6f7ef]/40 shadow-sm'
-              : 'border-[#bbcabf]/50 bg-white hover:border-[#006c49]/40 hover:bg-[#faf8ff]'
+              : 'border-outline-variant/50 bg-white hover:border-[#006c49]/40 hover:bg-[#faf8ff]'
           )}
           aria-pressed={selected === 'branches'}
         >
           {selected === 'branches' && (
-            <div className="absolute top-3 end-3">
+            <div className="absolute top-3 inset-e-3">
               <div className="w-5 h-5 rounded-full bg-[#006c49] flex items-center justify-center">
                 <svg className="w-3 h-3 text-white" viewBox="0 0 16 16" fill="currentColor">
                   <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
@@ -101,7 +101,7 @@ export function CompanyStructureStep({ onSelect }: CompanyStructureProps) {
           <h3 className="text-sm font-bold text-[#131b2e] mb-1">
             {t.onboardingBranchesTitle}
           </h3>
-          <p className="text-xs text-[#3c4a42] leading-relaxed">
+          <p className="text-xs text-on-surface-variant leading-relaxed">
             {t.onboardingBranchesDesc}
           </p>
         </button>

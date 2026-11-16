@@ -52,7 +52,7 @@ export function MockupAppShell({
 
   const effectiveCompanyName =
     companyName ||
-    (lang === 'ar' ? 'شركة لومينا للتقنية والخدمات ش.م.م' : 'Lumina Tech & Services SAE');
+    (lang === 'ar' ? 'شركة تقفيل للتقنية والخدمات ش.م.م' : 'Taqfel Tech & Services SAE');
 
   const navItems = [
     { id: 'dashboard' as const, label: lang === 'ar' ? 'لوحة المعلومات' : 'Dashboard', icon: IconBuilding },

@@ -54,7 +54,7 @@ flowchart TD
 | **صفحة لوحة التحكم الوهمية** | [`apps/landing/src/app/[locale]/dashboard/page.tsx`](file:///home/youssef/projects/common/hr-platform/apps/landing/src/app/%5Blocale%5D/dashboard/page.tsx) | تم بناؤها داخل تطبيق الـ Landing Page لعرض تجربة كاملة للعميل من التسجيل وحتى رؤية بيانات شركته دون مغادرة الموقع. | **حذف الملف والمجلد بالكامل.** لوحة التحكم الفعلية مكانها داخل تطبيق البوابة المستقل [`apps/portal`](file:///home/youssef/projects/common/hr-platform/apps/portal). |
 
 > [!WARNING]
-> لا ينبغي أبداً بقاء مسار `/dashboard` داخل `apps/landing` في بيئة الإنتاج، لأن تطبيق الـ Landing مخصص للتسويق واستقطاب العملاء والمصادقة المبدئية فقط، بينما المنظومة الإدارية الكاملة تُشغَّل عبر النطاق الفرعي للبوابة (مثلاً: `https://app.luminahr.eg`).
+> لا ينبغي أبداً بقاء مسار `/dashboard` داخل `apps/landing` في بيئة الإنتاج، لأن تطبيق الـ Landing مخصص للتسويق واستقطاب العملاء والمصادقة المبدئية فقط، بينما المنظومة الإدارية الكاملة تُشغَّل عبر النطاق الفرعي للبوابة (مثلاً: `https://app.Taqfelhr.eg`).
 
 ---
 
@@ -65,7 +65,7 @@ flowchart TD
   - [`apps/landing/lib/auth/service.ts`](file:///home/youssef/projects/common/hr-platform/apps/landing/lib/auth/service.ts)
   - [`apps/portal/src/lib/auth/service.ts`](file:///home/youssef/projects/common/hr-platform/apps/portal/src/lib/auth/service.ts) (نسخة البوابة)
 - **الكود التجريبي الحالي:**
-  - تخزين بيانات التسجيل والإعداد في `localStorage` بمفتاح `lumina_auth_mock_state`.
+  - تخزين بيانات التسجيل والإعداد في `localStorage` بمفتاح `Taqfel_auth_mock_state`.
   - محاكاة تأخير الشبكة عبر دالة `delay(ms)`.
   - إرجاع بيانات شركة وهمية ثابتة (`شركة النور للحلول البرمجية...`).
   - توفير دالة `logout()` لمسح الـ `localStorage` لتكرار تجربة العرض.
@@ -76,7 +76,7 @@ flowchart TD
 
 ```typescript
 // ❌ الكود الحالي (Mock Service):
-const STORAGE_KEY = 'lumina_auth_mock_state';
+const STORAGE_KEY = 'Taqfel_auth_mock_state';
 export const authService = {
   async signup(payload: SignupPayload) {
     await delay(1000);
@@ -89,7 +89,7 @@ export const authService = {
 import { createAuthClient } from 'better-auth/react';
 
 export const authClient = createAuthClient({
-  baseURL: process.env.NEXT_PUBLIC_API_URL, // e.g. https://api.luminahr.eg
+  baseURL: process.env.NEXT_PUBLIC_API_URL, // e.g. https://api.Taqfelhr.eg
 });
 ```
 
@@ -104,7 +104,7 @@ export const authClient = createAuthClient({
      زر `تجربة التأكيد الناجح` الذي يغير الحالة لـ `verified` مباشرة.
 - **البديل الفعلي في الإنتاج:**
   - الاعتماد التام على فتح الرابط الفعلي المرسل عبر الإيميل الحقيقي:  
-    `https://luminahr.eg/ar/verify-email?token=<signed_token>`
+    `https://Taqfelhr.eg/ar/verify-email?token=<signed_token>`
   - يقوم الكومبوننت بالتحقق من الـ Token عبر استدعاء الـ API الفعلي فقط؛ وفي حال عدم توفر Token أو انتهاء صلاحيته، يطلب من المستخدم إعادة إرسال الرابط.
 
 ---

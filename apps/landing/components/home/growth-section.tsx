@@ -6,7 +6,7 @@ import { IconCircleCheck, IconClock } from '@tabler/icons-react';
 import { motion } from 'motion/react';
 
 export function GrowthSection() {
-  const { lang, t, dir } = useLanguage();
+  const { lang, t } = useLanguage();
 
   return (
     <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

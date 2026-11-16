@@ -17,7 +17,7 @@ import { motion } from 'motion/react';
 export function ProductShowcase() {
   const { lang, t, employees, branches } = useLanguage();
   const [employeeSearch, setEmployeeSearch] = useState('');
-  const [selectedBranch, setSelectedBranch] = useState('all');
+  const selectedBranch = 'all';
 
   const filteredEmployees = employees.filter((emp) => {
     const matchesSearch =
@@ -88,7 +88,7 @@ export function ProductShowcase() {
                 </div>
                 <div>
                   <h3 className="text-sm sm:text-base font-bold text-[#131b2e]">
-                    {lang === 'ar' ? 'شركة لومينا للتقنية والخدمات' : 'Lumina Tech & Services LLC'}
+                    {lang === 'ar' ? 'شركة تقفيل للتقنية والخدمات' : 'Taqfel Tech & Services LLC'}
                   </h3>
                   <p className="text-xs text-outline">
                     {lang === 'ar' ? 'سجل تجاري: 104928 • القاهرة، مصر' : 'CR: 104928 • Cairo, Egypt'}

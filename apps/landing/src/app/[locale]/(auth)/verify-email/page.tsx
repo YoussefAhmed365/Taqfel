@@ -1,12 +1,13 @@
 'use client';
 
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { AuthLanguageProvider } from '../../../../../components/auth/auth-language-context';
 import { EmailVerification } from '../../../../../components/auth/verification/email-verification';
 
 function VerifyEmailContent() {
   const params = useParams();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const locale = (params?.locale as string) || 'ar';
   const email = searchParams.get('email') || '';
@@ -18,7 +19,7 @@ function VerifyEmailContent() {
         email={email}
         token={token}
         onContinue={() => {
-          window.location.href = `/${locale}/onboarding`;
+          router.push(`/${locale}/onboarding`);
         }}
       />
     </AuthLanguageProvider>

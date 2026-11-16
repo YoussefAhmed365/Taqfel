@@ -13,6 +13,9 @@ import {
   PricingPlan,
   FaqItem,
 } from '../../lib/types';
+import type enMessages from '../../messages/en.json';
+
+type HomeMessages = typeof enMessages;
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
@@ -23,7 +26,7 @@ export function useLanguage() {
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
   const router = useRouter();
   const pathname = usePathname();
-  const messages = useMessages() as any;
+  const messages = useMessages() as HomeMessages;
 
   const setLang = (newLang: Language) => {
     router.replace(pathname, { locale: newLang });
@@ -38,7 +41,7 @@ export function useLanguage() {
     dir,
     setLang,
     toggleLang,
-    t: messages.UI_TEXT as Record<string, any>,
+    t: messages.UI_TEXT,
     metrics: (messages.DEMO_METRICS || []) as MetricData[],
     employees: (messages.DEMO_EMPLOYEES || []) as EmployeeDemo[],
     branches: (messages.DEMO_BRANCHES || []) as BranchDemo[],

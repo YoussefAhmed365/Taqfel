@@ -5,9 +5,11 @@ import { Button } from '../../components/ui/button';
 import { Badge } from '../../components/ui/badge';
 import { IconArrowLeft, IconArrowRight, IconCircleCheck } from '@tabler/icons-react';
 import { motion } from 'motion/react';
+import { useRouter } from 'next/navigation';
 
 export function Hero() {
   const { t, dir, lang } = useLanguage();
+  const router = useRouter();
 
   return (
     <section className="relative pt-12 pb-10 sm:pt-16 sm:pb-14 lg:pt-20 lg:pb-16 overflow-hidden">
@@ -70,7 +72,7 @@ export function Hero() {
             variant="primary"
             className="w-full sm:w-auto font-semibold px-7 shadow-xs hover:shadow-md transition-all duration-200"
             onClick={() => {
-              window.location.href = `/${lang}/signup`;
+              router.push(`/${lang}/signup`);
             }}
           >
             <span>{t.ctaPrimary}</span>

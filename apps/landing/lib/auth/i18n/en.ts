@@ -3,7 +3,7 @@
  */
 export const authEn = {
   // Brand
-  brandName: 'Lumina HR',
+  brandName: 'Taqfel HR',
   brandSubtitle: 'Enterprise',
 
   // Language switcher
@@ -156,14 +156,14 @@ export const authEn = {
   // Footer
   footerPrivacy: 'Privacy',
   footerTerms: 'Terms',
-  footerCopyright: '© 2026 Lumina HR. All rights reserved.',
+  footerCopyright: '© 2026 Taqfel HR. All rights reserved.',
 
   // Metadata
-  metaLoginTitle: 'Sign In | Lumina HR',
-  metaSignupTitle: 'Create Company Account | Lumina HR',
-  metaVerifyTitle: 'Verify Email | Lumina HR',
-  metaForgotTitle: 'Recover Password | Lumina HR',
-  metaResetTitle: 'Reset Password | Lumina HR',
-  metaTwoFactorTitle: 'Verification | Lumina HR',
-  metaOnboardingTitle: 'Company Setup | Lumina HR',
+  metaLoginTitle: 'Sign In | Taqfel HR',
+  metaSignupTitle: 'Create Company Account | Taqfel HR',
+  metaVerifyTitle: 'Verify Email | Taqfel HR',
+  metaForgotTitle: 'Recover Password | Taqfel HR',
+  metaResetTitle: 'Reset Password | Taqfel HR',
+  metaTwoFactorTitle: 'Verification | Taqfel HR',
+  metaOnboardingTitle: 'Company Setup | Taqfel HR',
 } as const;

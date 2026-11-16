@@ -4,6 +4,12 @@ import { useLanguage } from '../../components/home/language-context';
 import { IconStack, IconSparkles, IconKey, IconTrendingUp } from '@tabler/icons-react';
 import { motion } from 'motion/react';
 
+type CredibilityItem = {
+  id: string;
+  title: string;
+  desc: string;
+};
+
 export function CredibilityStrip() {
   const { t } = useLanguage();
 
@@ -26,7 +32,7 @@ export function CredibilityStrip() {
 
         {/* 4 Clean Indicators */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
-          {t.credibilityItems.map((item: any, index: number) => {
+          {t.credibilityItems.map((item: CredibilityItem, index: number) => {
             const Icon = iconMap[index % iconMap.length];
             return (
               <motion.div

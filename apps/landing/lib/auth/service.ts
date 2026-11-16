@@ -54,7 +54,7 @@ export interface RegisteredCompany {
   teamMethod?: 'manual' | 'excel' | 'skipped';
 }
 
-const STORAGE_KEY = 'lumina_auth_mock_state';
+const STORAGE_KEY = 'Taqfel_auth_mock_state';
 
 function getStoredState(): RegisteredCompany | null {
   if (typeof window === 'undefined') return null;
@@ -70,7 +70,7 @@ function saveStoredState(data: Partial<RegisteredCompany>) {
   if (typeof window === 'undefined') return;
   try {
     const current = getStoredState() || {
-      companyName: 'شركة لومينا المحدودة',
+      companyName: 'شركة تقفيل المحدودة',
       fullName: 'أحمد محمود',
       email: 'admin@company.com',
       phone: '+20 100 123 4567',
@@ -147,6 +147,7 @@ export const authService = {
    * Resend verification email.
    */
   async resendVerification(email: string): Promise<AuthResponse> {
+    void email;
     await delay(600);
     return { success: true, message: 'Verification email sent' };
   },
@@ -155,6 +156,7 @@ export const authService = {
    * Request a password reset link.
    */
   async requestPasswordReset(email: string): Promise<AuthResponse> {
+    void email;
     await delay(800);
     return { success: true, message: 'If an account exists, a reset link has been sent' };
   },
@@ -163,6 +165,7 @@ export const authService = {
    * Reset the password using a token.
    */
   async resetPassword(token: string, newPassword: string): Promise<AuthResponse> {
+    void newPassword;
     await delay(800);
     if (token === 'expired') {
       return { success: false, errorCode: 'TOKEN_EXPIRED', error: 'Token expired' };

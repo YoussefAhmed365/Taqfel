@@ -1,7 +1,7 @@
 {
   "UI_TEXT": {
     "announcement": "إدارة موارد شركتك وموظفيك بطريقة أبسط",
-    "brandName": "Lumina HR",
+    "brandName": "تقفيل",
     "brandSubtitle": "Enterprise",
     "tagline": "منصة إدارة الموارد البشرية والمؤسسية",
     "navHome": "الرئيسية",
@@ -108,10 +108,10 @@
     "pricingEyebrow": "باقات واضحة",
     "pricingHeadline": "اختر الباقة المناسبة لمرحلة نمو شركتك",
     "pricingSubtitle": "شفافية كاملة لتنظيم فريقك دون تكاليف خفية أو تعقيدات.",
-    "popularBadge": "الأكثر ملاءمة للشركات النامية",
+    "popularBadge": "الأكثر شيوعًا",
     "faqEyebrow": "إجابات واضحة",
     "faqHeadline": "الأسئلة الشائعة",
-    "faqSubtitle": "كل ما تحتاج لمعرفته حول بدء تنظيم شركتك وفريقك مع Lumina HR.",
+    "faqSubtitle": "كل ما تحتاج لمعرفته حول بدء تنظيم شركتك وفريقك مع Taqfel HR.",
     "finalCtaHeadline": "ابدأ ببناء شركة أكثر تنظيمًا اليوم.",
     "finalCtaDesc": "خطوة واحدة تفصلك عن تنظيم فريقك وفروعك وتوفير ساعات من العمل الإداري المتكرر.",
     "footerDesc": "منصة حديثة لإدارة هيكل الشركة، الموظفين، الفروع، والمستخدمين للشركات في مصر والشرق الأوسط بطريقة واضحة ومنظمة.",
@@ -122,7 +122,7 @@
     "footerTerms": "شروط الخدمة",
     "footerSecurity": "أمن البيانات",
     "footerContact": "تواصل مع الدعم",
-    "footerCopyright": "جميع الحقوق محفوظة © Lumina HR Enterprise.",
+    "footerCopyright": "جميع الحقوق محفوظة © Taqfel HR Enterprise.",
     "demoWatermark": "عرض توضيحي - بيانات تجريبية"
   },
   "DEMO_METRICS": [

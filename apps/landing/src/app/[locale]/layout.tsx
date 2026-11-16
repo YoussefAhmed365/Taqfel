@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import type { Language } from '../../../lib/types';
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
 	subsets: ['arabic'],
@@ -27,8 +28,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-	title: 'Lumina HR | Simplify Your Management',
-	description: 'A modern platform for managing company structure, employees, branches, and users.',
+	title: 'Taqfel - تقفيل | Simplify Your Management',
+	description: 'A platform for managing company structure, employees, branches, and users.',
 };
 
 export default async function RootLayout({
@@ -40,7 +41,7 @@ export default async function RootLayout({
 }) {
 	const locale = (await params).locale;
 
-	if (!routing.locales.includes(locale as any)) {
+	if (!routing.locales.includes(locale as Language)) {
 		notFound();
 	}
 
