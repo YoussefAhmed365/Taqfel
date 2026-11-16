@@ -5,9 +5,11 @@ import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { IconCheck, IconSparkles } from '@tabler/icons-react';
 import { motion } from 'motion/react';
+import { useRouter } from 'next/navigation';
 
 export function PricingSection() {
   const { lang, t, pricingPlans } = useLanguage();
+  const router = useRouter();
 
   return (
     <section id="pricing" className="py-16 sm:py-24 bg-[#faf8ff] border-t border-surface-dim">
@@ -19,9 +21,6 @@ export function PricingSection() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
         >
-          <Badge variant="emerald" size="sm" className="mb-3 font-semibold">
-            {t.pricingEyebrow}
-          </Badge>
           <h2 className="text-2xl sm:text-4xl font-bold text-[#131b2e] tracking-tight mb-4">
             {t.pricingHeadline}
           </h2>
@@ -51,7 +50,7 @@ export function PricingSection() {
                     <Badge
                       variant="lime"
                       size="sm"
-                      className="font-bold shadow-xs px-3 py-1 bg-surface-container-low text-primary border-2 border-primary-fixed gap-1.5 w-fit"
+                      className="font-bold shadow-xs px-4 bg-white text-primary border-2 border-primary-fixed gap-1.5 w-fit"
                     >
                       <IconSparkles size={24} className="text-primary" />
                       <span>{t.popularBadge}</span>
@@ -97,7 +96,7 @@ export function PricingSection() {
                     size="md"
                     className="w-full font-semibold"
                     onClick={() => {
-                      window.location.href = `/${lang}/signup`;
+                      router.push(`/${lang}/signup`);
                     }}
                   >
                     {plan.ctaText}

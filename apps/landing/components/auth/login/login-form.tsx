@@ -9,6 +9,7 @@ import { AuthButton } from '../../ui/auth-button';
 import { AuthAlert } from '../../ui/auth-alert';
 import { validateLoginForm } from '../../../lib/auth/validation';
 import { authService, type AuthErrorCode } from '../../../lib/auth/service';
+import { useRouter } from 'next/navigation';
 
 type LoginState =
   | 'idle'
@@ -17,7 +18,8 @@ type LoginState =
   | 'error';
 
 export function LoginForm() {
-  const { t, lang, dir } = useAuthLanguage();
+  const { t, lang } = useAuthLanguage();
+  const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -61,7 +63,7 @@ export function LoginForm() {
         if (response.success) {
           setLoginState('success');
           // In production: store interim session token and redirect to 2FA
-          window.location.href = `/${lang}/two-factor`;
+          router.push(`/${lang}/two-factor`);
         } else {
           setLoginState('error');
           setErrorCode(response.errorCode || 'UNKNOWN_ERROR');
@@ -71,7 +73,7 @@ export function LoginForm() {
         setErrorCode('UNKNOWN_ERROR');
       }
     },
-    [email, password, lang, t]
+    [email, password, lang, router]
   );
 
   return (

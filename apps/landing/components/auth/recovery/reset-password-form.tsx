@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useCallback, type FormEvent } from 'react';
+import { useState, useCallback, type SubmitEvent } from 'react';
 import { useAuthLanguage } from '../auth-language-context';
 import { AuthShell, AuthHeading } from '../auth-shell';
 import { PasswordInput } from '../../ui/password-input';
 import { AuthButton } from '../../ui/auth-button';
-import { AuthAlert } from '../../ui/auth-alert';
 import { validateResetPasswordForm, checkPasswordStrength } from '../../../lib/auth/validation';
 import { authService } from '../../../lib/auth/service';
+import { useRouter } from 'next/navigation';
 
 type ResetState = 'form' | 'loading' | 'success' | 'expired' | 'invalid';
 
@@ -17,6 +17,7 @@ interface ResetPasswordFormProps {
 
 export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const { t, lang } = useAuthLanguage();
+  const router = useRouter();
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,7 +27,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const strength = checkPasswordStrength(password, lang);
 
   const handleSubmit = useCallback(
-    async (e: FormEvent) => {
+    async (e: SubmitEvent) => {
       e.preventDefault();
       setFieldErrors({});
 
@@ -67,7 +68,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           </div>
           <AuthHeading title={t.resetSuccessTitle} subtitle={t.resetSuccessSubtitle} />
           <AuthButton
-            onClick={() => window.location.href = `/${lang}/login`}
+            onClick={() => router.push(`/${lang}/login`)}
             className="w-full"
             size="lg"
           >
@@ -83,14 +84,14 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
     return (
       <AuthShell width="narrow">
         <div className="text-center space-y-5">
-          <div className="mx-auto w-16 h-16 rounded-full bg-[#ffdad6]/30 flex items-center justify-center">
-            <svg className="w-8 h-8 text-[#ba1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <div className="mx-auto w-16 h-16 rounded-full bg-error-container/30 flex items-center justify-center">
+            <svg className="w-8 h-8 text-error" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <AuthHeading title={t.resetExpiredTitle} subtitle={t.resetExpiredSubtitle} />
           <AuthButton
-            onClick={() => window.location.href = `/${lang}/forgot-password`}
+            onClick={() => router.push(`/${lang}/forgot-password`)}
             className="w-full"
             size="lg"
           >
@@ -106,14 +107,14 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
     return (
       <AuthShell width="narrow">
         <div className="text-center space-y-5">
-          <div className="mx-auto w-16 h-16 rounded-full bg-[#ffdad6]/30 flex items-center justify-center">
-            <svg className="w-8 h-8 text-[#ba1a1a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <div className="mx-auto w-16 h-16 rounded-full bg-error-container/30 flex items-center justify-center">
+            <svg className="w-8 h-8 text-error" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <AuthHeading title={t.resetInvalidTitle} subtitle={t.resetInvalidSubtitle} />
           <AuthButton
-            onClick={() => window.location.href = `/${lang}/forgot-password`}
+            onClick={() => router.push(`/${lang}/forgot-password`)}
             className="w-full"
             size="lg"
           >
@@ -142,6 +143,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           strengthScore={strength.score}
           strengthLabel={strength.label}
           strengthChecks={strength.checks}
+          autoFocus
           required
         />
 

@@ -16,7 +16,7 @@ export interface RegisteredCompany {
   teamMethod?: 'manual' | 'excel' | 'skipped';
 }
 
-const STORAGE_KEY = 'lumina_auth_mock_state';
+const STORAGE_KEY = 'Taqfel_auth_mock_state';
 
 function getStoredState(): RegisteredCompany | null {
   try {

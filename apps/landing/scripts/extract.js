@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 
 let content = fs.readFileSync('lib/data.ts', 'utf-8');
 // Remove imports

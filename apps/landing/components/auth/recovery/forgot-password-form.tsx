@@ -7,9 +7,11 @@ import { AuthInput } from '../../ui/auth-input';
 import { AuthButton } from '../../ui/auth-button';
 import { validateEmailOnly } from '../../../lib/auth/validation';
 import { authService } from '../../../lib/auth/service';
+import { useRouter } from 'next/navigation';
 
 export function ForgotPasswordForm() {
   const { t, lang } = useAuthLanguage();
+  const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -57,9 +59,9 @@ export function ForgotPasswordForm() {
             <button
               type="button"
               onClick={() => {
-                window.location.href = `/${lang}/reset-password?token=valid`;
+                router.push(`/${lang}/reset-password?token=valid`);
               }}
-              className="w-full py-2.5 px-3 rounded-xl bg-[#006c49] text-white text-xs font-semibold hover:bg-[#005236] transition-colors shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
+              className="w-full py-2.5 px-3 rounded-xl bg-[#006c49] text-white text-xs font-semibold hover:bg-on-primary-fixed-variant transition-colors shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <span>{lang === 'ar' ? 'محاكاة: فتح رابط إعادة تعيين كلمة المرور' : 'Simulate: Open Reset Password Link'}</span>
               <span className="rtl:rotate-180">➔</span>
@@ -69,7 +71,7 @@ export function ForgotPasswordForm() {
           <div>
             <a
               href={`/${lang}/login`}
-              className="inline-flex items-center gap-1.5 text-sm text-[#006c49] hover:text-[#005236] font-semibold hover:underline transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm text-[#006c49] hover:text-on-primary-fixed-variant font-semibold hover:underline transition-colors"
             >
               {t.forgotBackToLogin}
             </a>
@@ -111,7 +113,7 @@ export function ForgotPasswordForm() {
       <div className="mt-6 text-center">
         <a
           href={`/${lang}/login`}
-          className="text-sm text-[#3c4a42] hover:text-[#006c49] font-medium hover:underline transition-colors"
+          className="text-sm text-on-surface-variant hover:text-[#006c49] font-medium hover:underline transition-colors"
         >
           {t.forgotBackToLogin}
         </a>

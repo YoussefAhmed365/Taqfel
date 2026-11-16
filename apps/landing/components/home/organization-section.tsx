@@ -44,7 +44,7 @@ export function OrganizationSection() {
                 <IconBuilding className="w-5 h-5" />
               </div>
               <h3 className="text-sm sm:text-base font-bold text-[#131b2e]">
-                {lang === 'ar' ? 'شركة لومينا للتقنية والخدمات ش.م.م' : 'Lumina Tech & Services SAE'}
+                {lang === 'ar' ? 'شركة تقفيل للتقنية والخدمات ش.م.م' : 'Taqfel Tech & Services SAE'}
               </h3>
               <p className="text-xs text-outline mt-0.5">
                 {lang === 'ar' ? 'المقر الإداري الرئيسي • سجل تجاري موحد' : 'Headquarters • Corporate Entity'}

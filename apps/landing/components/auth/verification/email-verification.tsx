@@ -7,6 +7,7 @@ import { AuthButton } from '../../ui/auth-button';
 import { AuthAlert } from '../../ui/auth-alert';
 import { authService } from '../../../lib/auth/service';
 import { RESEND_COOLDOWN_SECONDS, MAX_RESEND_ATTEMPTS } from '../../../lib/auth/constants';
+import { useRouter } from 'next/navigation';
 
 type VerificationState = 'pending' | 'verified' | 'expired' | 'invalid';
 
@@ -24,7 +25,8 @@ export function EmailVerification({ email, token, onContinue }: EmailVerificatio
   const [resendCount, setResendCount] = useState(0);
   const [cooldown, setCooldown] = useState(0);
   const [resendSuccess, setResendSuccess] = useState(false);
-  const timerRef = useRef<any>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const router = useRouter();
 
   // Verify token on mount if present
   useEffect(() => {
@@ -50,7 +52,8 @@ export function EmailVerification({ email, token, onContinue }: EmailVerificatio
     timerRef.current = setInterval(() => {
       setCooldown((c) => {
         if (c <= 1) {
-          clearInterval(timerRef.current);
+          const timer = timerRef.current;
+          if (timer) clearInterval(timer);
           return 0;
         }
         return c - 1;
@@ -230,7 +233,7 @@ export function EmailVerification({ email, token, onContinue }: EmailVerificatio
             <button
               type="button"
               onClick={() => {
-                window.location.href = `/${lang}/signup`;
+                router.push(`/${lang}/signup`);
               }}
               className="text-on-surface-variant hover:text-[#006c49] font-medium hover:underline transition-colors"
             >

@@ -17,19 +17,41 @@ export function TwoFactorForm() {
 
   const code = digits.join('');
 
+  const handleSubmit = useCallback(async (submittedCode = code) => {
+    if (submittedCode.length !== 6) return;
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await authService.verifyTwoFactor(submittedCode);
+      if (response.success) {
+        window.open(`${process.env.NEXT_PUBLIC_PORTAL_URL || 'http://localhost:5174'}?lang=${lang}`, '_self');
+      } else {
+        setError(t.twoFactorInvalidCode);
+        setDigits(Array(6).fill(''));
+        inputRefs.current[0]?.focus();
+      }
+    } catch {
+      setError(t.loginUnexpectedError);
+    } finally {
+      setLoading(false);
+    }
+  }, [code, t, lang]);
+
   const setDigit = useCallback((index: number, value: string) => {
     if (!/^\d?$/.test(value)) return;
-    setDigits((prev) => {
-      const next = [...prev];
-      next[index] = value;
-      return next;
-    });
+    const next = [...digits];
+    next[index] = value;
+    setDigits(next);
     setError(null);
+    if (next.every(Boolean)) {
+      void handleSubmit(next.join(''));
+    }
     // Auto-advance
     if (value && index < 5) {
       inputRefs.current[index + 1]?.focus();
     }
-  }, []);
+  }, [digits, handleSubmit]);
 
   const handleKeyDown = useCallback(
     (index: number, e: KeyboardEvent<HTMLInputElement>) => {
@@ -50,31 +72,13 @@ export function TwoFactorForm() {
     }
     setDigits(newDigits);
     setError(null);
+    if (pasted.length === 6) {
+      void handleSubmit(pasted);
+    }
     // Focus the next empty or last input
     const focusIndex = Math.min(pasted.length, 5);
     inputRefs.current[focusIndex]?.focus();
-  }, []);
-
-  const handleSubmit = useCallback(async () => {
-    if (code.length !== 6) return;
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await authService.verifyTwoFactor(code);
-      if (response.success) {
-        window.location.href = `${process.env.NEXT_PUBLIC_PORTAL_URL || 'http://localhost:5174'}?lang=${lang}`;
-      } else {
-        setError(t.twoFactorInvalidCode);
-        setDigits(Array(6).fill(''));
-        inputRefs.current[0]?.focus();
-      }
-    } catch {
-      setError(t.loginUnexpectedError);
-    } finally {
-      setLoading(false);
-    }
-  }, [code, t, lang]);
+  }, [handleSubmit]);
 
   const handleResend = useCallback(async () => {
     // Mock: just clear state
@@ -123,9 +127,10 @@ export function TwoFactorForm() {
               value={digit}
               onChange={(e) => setDigit(i, e.target.value)}
               onKeyDown={(e) => handleKeyDown(i, e)}
-              className="w-11 h-13 sm:w-12 sm:h-14 text-center text-lg font-bold text-[#131b2e] bg-white border border-[#bbcabf] rounded-xl transition-all duration-200 outline-none focus:ring-2 focus:ring-[#006c49]/20 focus:border-[#006c49] hover:border-[#6c7a71]"
+              className="w-11 h-13 sm:w-12 sm:h-14 text-center text-lg font-bold text-[#131b2e] bg-white border border-outline-variant rounded-xl transition-all duration-200 outline-none focus:ring-2 focus:ring-[#006c49]/20 focus:border-[#006c49] hover:border-outline"
               aria-label={`Digit ${i + 1}`}
               autoComplete={i === 0 ? 'one-time-code' : 'off'}
+              autoFocus={i === 0}
             />
           ))}
         </div>
@@ -135,8 +140,10 @@ export function TwoFactorForm() {
           <button
             type="button"
             onClick={() => {
-              setDigits(['1', '2', '3', '4', '5', '6']);
+              const demoCode = '123456';
+              setDigits(demoCode.split(''));
               setError(null);
+              void handleSubmit(demoCode);
             }}
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#e6f7ef] text-[#006c49] text-xs font-semibold hover:bg-[#d0f0e2] transition-colors border border-[#006c49]/20 cursor-pointer"
           >
@@ -148,7 +155,7 @@ export function TwoFactorForm() {
 
       <div className="space-y-3">
         <AuthButton
-          onClick={handleSubmit}
+          onClick={() => void handleSubmit()}
           loading={loading}
           loadingText={t.twoFactorVerifying}
           className="w-full"
@@ -162,14 +169,14 @@ export function TwoFactorForm() {
           <button
             type="button"
             onClick={handleResend}
-            className="text-[#3c4a42] hover:text-[#006c49] font-medium hover:underline transition-colors"
+            className="text-on-surface-variant hover:text-[#006c49] font-medium hover:underline transition-colors cursor-pointer"
           >
             {t.twoFactorResend}
           </button>
-          <span className="text-[#bbcabf]">·</span>
+          <span className="text-outline-variant">·</span>
           <button
             type="button"
-            className="text-[#3c4a42] hover:text-[#006c49] font-medium hover:underline transition-colors"
+            className="text-on-surface-variant hover:text-[#006c49] font-medium hover:underline transition-colors cursor-pointer"
           >
             {t.twoFactorAlternative}
           </button>

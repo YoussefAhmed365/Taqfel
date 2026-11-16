@@ -1,9 +1,9 @@
 export const BRAND = {
-  name: 'Lumina HR',
+  name: 'Taqfel HR',
   subName: 'Enterprise',
-  fullName: 'Lumina HR Enterprise',
-  domain: 'luminahr.eg',
-  contactEmail: 'contact@luminahr.eg',
+  fullName: 'Taqfel HR Enterprise',
+  domain: 'Taqfelhr.eg',
+  contactEmail: 'contact@Taqfelhr.eg',
 };
 
 export const COLOR_TOKENS = {
