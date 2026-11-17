@@ -1,378 +1,519 @@
 {
-  "UI_TEXT": {
-    "announcement": "A simpler way to manage your company and employees",
-    "brandName": "Taqfel",
-    "brandSubtitle": "Enterprise",
-    "tagline": "Enterprise Human Resources & Organization Platform",
-    "navHome": "Home",
-    "navPlatform": "Platform",
-    "navPricing": "Pricing",
-    "navFaq": "FAQ",
-    "navLogin": "Sign In",
-    "ctaPrimary": "Get started",
-    "ctaExplore": "Explore platform",
-    "heroEyebrow": "Enterprise Organization & Workforce Platform",
-    "heroH1": "Manage your company and team,\nmore simply.",
-    "heroDescription": "A modern platform that helps you organize your company and employees from one place, with a clear experience built to grow.",
-    "heroMicrocopy": "Fast and seamless onboarding • Built for businesses in Egypt & MENA • No unnecessary clutter",
-    "demoNotice": "Demo preview data only",
-    "credibilityTitle": "Designed for companies seeking clearer, more structured administration",
-    "credibilityItems": [
-      {
-        "id": "1",
-        "title": "Structured Management",
-        "desc": "Solid foundation for companies and branches"
-      },
-      {
-        "id": "2",
-        "title": "Simpler Experience",
-        "desc": "Clean interface free from needless friction"
-      },
-      {
-        "id": "3",
-        "title": "Scoped Access",
-        "desc": "Disciplined administrative permissions"
-      },
-      {
-        "id": "4",
-        "title": "Built to Grow",
-        "desc": "Scales steadily as your organization expands"
-      }
+    "META": {
+        "title": "Taqfel - Simplify Your Management",
+        "description": "A platform for managing company structure, employees, branches, and users."
+    },
+    "UI_TEXT": {
+        "announcement": "A simpler way to manage your company and employees",
+        "brandName": "Taqfel",
+        "brandSubtitle": "Enterprise",
+        "tagline": "Enterprise Human Resources & Organization Platform",
+        "navHome": "Home",
+        "navPlatform": "Platform",
+        "navPricing": "Pricing",
+        "navFaq": "FAQ",
+        "navLogin": "Sign In",
+        "ctaPrimary": "Get started",
+        "ctaExplore": "Explore platform",
+        "heroEyebrow": "Enterprise Organization & Workforce Platform",
+        "heroH1": "Manage your company and team,\nmore simply.",
+        "heroDescription": "A modern platform that helps you organize your company and employees from one place, with a clear experience built to grow.",
+        "heroMicrocopy": "Fast and seamless onboarding • Built for businesses in Egypt & MENA • No unnecessary clutter",
+        "demoNotice": "Demo preview data only",
+        "credibilityTitle": "Designed for companies seeking clearer, more structured administration",
+        "credibilityItems": [
+            {
+                "id": "1",
+                "title": "Structured Management",
+                "desc": "Solid foundation for companies and branches"
+            },
+            {
+                "id": "2",
+                "title": "Simpler Experience",
+                "desc": "Clean interface free from needless friction"
+            },
+            {
+                "id": "3",
+                "title": "Scoped Access",
+                "desc": "Disciplined administrative permissions"
+            },
+            {
+                "id": "4",
+                "title": "Built to Grow",
+                "desc": "Scales steadily as your organization expands"
+            }
+        ],
+        "valuePropEyebrow": "Core Value",
+        "valuePropHeadline": "Designed to fit how your company works.",
+        "valuePropSubtitle": "Practical solutions giving management peace of mind and complete command over operational records.",
+        "workspaceEyebrow": "Administrative Workspace",
+        "workspaceHeadline": "One unified workspace for your company.",
+        "workspaceDesc": "Bring your headquarters and operational branches into a unified dashboard giving immediate visibility into team distribution without juggling scattered files.",
+        "workspacePoints": [
+            "Unified profile for your company and its branch network",
+            "Live headcount visibility and department breakdown",
+            "Rapid actions to add locations and assign managers"
+        ],
+        "teamEyebrow": "Employee Directory",
+        "teamHeadline": "Organize your team without complexity.",
+        "teamDesc": "Structured records for every team member including hire dates, assigned branch, department, and duties with instant search and filtering.",
+        "teamPoints": [
+            "Comprehensive and clean employee profiles",
+            "Rapid filters by branch or employment status",
+            "Chronological tenure timeline and onboarding history"
+        ],
+        "orgEyebrow": "Organizational Structure",
+        "orgHeadline": "From company structure to every person in your team.",
+        "orgDesc": "A transparent chain connecting the parent organization to all branches, operational hubs, and departmental teams.",
+        "companyHQ": "Headquarters (Cairo)",
+        "branch1": "Alexandria Branch",
+        "branch2": "Giza Branch",
+        "branch3": "Mansoura Branch",
+        "teamTech": "Engineering & Transformation",
+        "teamOps": "Operations & Logistics",
+        "teamFinance": "Finance & Accounting",
+        "teamPeople": "People Operations",
+        "importEyebrow": "Bulk Import",
+        "importHeadline": "Add employees and branches in one go.",
+        "importDesc": "Import your data from Excel in a clear, rapid workflow.",
+        "importFileName": "employees_q3_records.xlsx",
+        "importFileSize": "1.4 MB",
+        "importTotal": "248 records detected",
+        "importValid": "245 records verified & ready",
+        "importIssues": "3 require quick review",
+        "importReadyStatus": "Ready for clean import",
+        "importButtonAction": "Import records now",
+        "importReviewAction": "Inspect 3 flagged items",
+        "securityEyebrow": "Security & Privacy",
+        "securityHeadline": "Your company data deserves dedicated care.",
+        "securitySubtitle": "Robust institutional standards ensuring complete confidentiality and workspace isolation.",
+        "growthEyebrow": "Continuous Growth",
+        "growthHeadline": "A platform that grows with your company.",
+        "growthSubtitle": "A dependable foundation today with a clear horizon meeting your future administrative needs.",
+        "todayStage": "Today (Strong Foundation)",
+        "todayBadge": "Fully Available",
+        "todayItems": [
+            "Company organization & entity profiles",
+            "Employee directory & department tagging",
+            "Branch management & location hubs",
+            "Internal users & role permissions",
+            "Unified administrative workspace",
+            "Bulk Excel import & export engine"
+        ],
+        "futureStage": "As Your Needs Grow",
+        "futureBadge": "Roadmap Progression",
+        "futureItems": [
+            "Smart attendance & leave tracking",
+            "Compliant payroll calculation runs",
+            "Performance reviews & competency cycles",
+            "Social insurance & regulatory compliance",
+            "Extended enterprise integrations"
+        ],
+        "pricingEyebrow": "Transparent Plans",
+        "pricingHeadline": "Choose the plan tailored to your stage of growth",
+        "pricingSubtitle": "Clear terms to organize your team without hidden costs or surprises.",
+        "popularBadge": "Most popular",
+        "faqEyebrow": "Clear Answers",
+        "faqHeadline": "Frequently Asked Questions",
+        "faqSubtitle": "Everything you need to know about getting organized with Taqfel HR.",
+        "finalCtaHeadline": "Start building a more organized company today.",
+        "finalCtaDesc": "One simple step to organize your team and branches, saving hours of recurring administrative work.",
+        "footerDesc": "A modern platform to organize company structures, employees, branches, and internal users for businesses in Egypt and the MENA region.",
+        "footerColPlatform": "Platform",
+        "footerColCompany": "Company",
+        "footerColLegal": "Legal & Compliance",
+        "footerPrivacy": "Privacy Policy",
+        "footerTerms": "Terms of Service",
+        "footerSecurity": "Data Security",
+        "footerContact": "Contact Support",
+        "footerCopyright": "All rights reserved © Taqfel HR Enterprise.",
+        "demoWatermark": "Product Preview — Demo Data"
+    },
+    "DEMO_METRICS": [
+        {
+            "id": "employees",
+            "label": "Total Employees",
+            "value": "248",
+            "subtext": "241 Active • 7 On Leave",
+            "trend": "+12 this month",
+            "badge": "Active",
+            "variant": "emerald"
+        },
+        {
+            "id": "branches",
+            "label": "Operational Branches",
+            "value": "4",
+            "subtext": "Cairo, Alexandria, Giza, Mansoura",
+            "trend": "Full coverage",
+            "badge": "Stable",
+            "variant": "lime"
+        },
+        {
+            "id": "users",
+            "label": "Internal Users",
+            "value": "12",
+            "subtext": "4 System Admins • 8 Managers",
+            "trend": "Scoped access",
+            "badge": "Secured",
+            "variant": "slate"
+        },
+        {
+            "id": "records",
+            "label": "Profile Completion",
+            "value": "98.4%",
+            "subtext": "Employment record health",
+            "trend": "Live sync",
+            "badge": "Up to date",
+            "variant": "emerald"
+        }
     ],
-    "valuePropEyebrow": "Core Value",
-    "valuePropHeadline": "Designed to fit how your company works.",
-    "valuePropSubtitle": "Practical solutions giving management peace of mind and complete command over operational records.",
-    "workspaceEyebrow": "Administrative Workspace",
-    "workspaceHeadline": "One unified workspace for your company.",
-    "workspaceDesc": "Bring your headquarters and operational branches into a unified dashboard giving immediate visibility into team distribution without juggling scattered files.",
-    "workspacePoints": [
-      "Unified profile for your company and its branch network",
-      "Live headcount visibility and department breakdown",
-      "Rapid actions to add locations and assign managers"
+    "DEMO_EMPLOYEES": [
+        {
+            "id": "EMP-1042",
+            "name": "Ahmed M. El-Sherif",
+            "role": "Operations Director",
+            "department": "General Management",
+            "branch": "HQ - Maadi",
+            "status": "active",
+            "joinedDate": "Jan 15, 2022",
+            "avatarSeed": "AS"
+        },
+        {
+            "id": "EMP-1088",
+            "name": "Mariam T. El-Awady",
+            "role": "Senior People Specialist",
+            "department": "Human Resources",
+            "branch": "HQ - Maadi",
+            "status": "active",
+            "joinedDate": "Mar 01, 2023",
+            "avatarSeed": "MA"
+        },
+        {
+            "id": "EMP-1115",
+            "name": "Karim H. El-Deeb",
+            "role": "Alexandria Branch Manager",
+            "department": "Branch Operations",
+            "branch": "Alexandria - Smouha",
+            "status": "active",
+            "joinedDate": "Aug 10, 2023",
+            "avatarSeed": "KD"
+        },
+        {
+            "id": "EMP-1142",
+            "name": "Sara A. Kamal",
+            "role": "Payroll & Cost Accountant",
+            "department": "Finance",
+            "branch": "Giza - Mohandessin",
+            "status": "active",
+            "joinedDate": "Dec 05, 2023",
+            "avatarSeed": "SK"
+        },
+        {
+            "id": "EMP-1190",
+            "name": "Omar N. El-Zahed",
+            "role": "Logistics Supervisor",
+            "department": "Operations & Support",
+            "branch": "Delta - Mansoura",
+            "status": "leave",
+            "joinedDate": "Mar 20, 2024",
+            "avatarSeed": "OZ"
+        }
     ],
-    "teamEyebrow": "Employee Directory",
-    "teamHeadline": "Organize your team without complexity.",
-    "teamDesc": "Structured records for every team member including hire dates, assigned branch, department, and duties with instant search and filtering.",
-    "teamPoints": [
-      "Comprehensive and clean employee profiles",
-      "Rapid filters by branch or employment status",
-      "Chronological tenure timeline and onboarding history"
+    "DEMO_BRANCHES": [
+        {
+            "id": "BR-01",
+            "name": "Headquarters (Maadi)",
+            "city": "Cairo",
+            "employeeCount": 142,
+            "manager": "Ahmed M. El-Sherif",
+            "code": "CAI-HQ"
+        },
+        {
+            "id": "BR-02",
+            "name": "Alexandria Branch (Smouha)",
+            "city": "Alexandria",
+            "employeeCount": 48,
+            "manager": "Karim H. El-Deeb",
+            "code": "ALX-01"
+        },
+        {
+            "id": "BR-03",
+            "name": "Giza Branch (Mohandessin)",
+            "city": "Giza",
+            "employeeCount": 36,
+            "manager": "Sara A. Kamal",
+            "code": "GZA-01"
+        },
+        {
+            "id": "BR-04",
+            "name": "Delta Branch (Mansoura)",
+            "city": "Dakahlia",
+            "employeeCount": 22,
+            "manager": "Omar N. El-Zahed",
+            "code": "MNZ-01"
+        }
     ],
-    "orgEyebrow": "Organizational Structure",
-    "orgHeadline": "From company structure to every person in your team.",
-    "orgDesc": "A transparent chain connecting the parent organization to all branches, operational hubs, and departmental teams.",
-    "companyHQ": "Headquarters (Cairo)",
-    "branch1": "Alexandria Branch",
-    "branch2": "Giza Branch",
-    "branch3": "Mansoura Branch",
-    "teamTech": "Engineering & Transformation",
-    "teamOps": "Operations & Logistics",
-    "teamFinance": "Finance & Accounting",
-    "teamPeople": "People Operations",
-    "importEyebrow": "Bulk Import",
-    "importHeadline": "Add employees and branches in one go.",
-    "importDesc": "Import your data from Excel in a clear, rapid workflow.",
-    "importFileName": "employees_q3_records.xlsx",
-    "importFileSize": "1.4 MB",
-    "importTotal": "248 records detected",
-    "importValid": "245 records verified & ready",
-    "importIssues": "3 require quick review",
-    "importReadyStatus": "Ready for clean import",
-    "importButtonAction": "Import records now",
-    "importReviewAction": "Inspect 3 flagged items",
-    "securityEyebrow": "Security & Privacy",
-    "securityHeadline": "Your company data deserves dedicated care.",
-    "securitySubtitle": "Robust institutional standards ensuring complete confidentiality and workspace isolation.",
-    "growthEyebrow": "Continuous Growth",
-    "growthHeadline": "A platform that grows with your company.",
-    "growthSubtitle": "A dependable foundation today with a clear horizon meeting your future administrative needs.",
-    "todayStage": "Today (Strong Foundation)",
-    "todayBadge": "Fully Available",
-    "todayItems": [
-      "Company organization & entity profiles",
-      "Employee directory & department tagging",
-      "Branch management & location hubs",
-      "Internal users & role permissions",
-      "Unified administrative workspace",
-      "Bulk Excel import & export engine"
+    "VALUE_PROPOSITIONS": [
+        {
+            "number": "01",
+            "title": "Simpler",
+            "description": "Clear management without unnecessary complexity, focused on what matters."
+        },
+        {
+            "number": "02",
+            "title": "Clearer",
+            "description": "Complete and direct visibility into your company, branches, and team in one interface."
+        },
+        {
+            "number": "03",
+            "title": "Flexible",
+            "description": "Adapts seamlessly to different company sizes, organizational structures, and branches."
+        },
+        {
+            "number": "04",
+            "title": "Ready to Grow",
+            "description": "Start with what you need today and scale confidently as your organization expands."
+        }
     ],
-    "futureStage": "As Your Needs Grow",
-    "futureBadge": "Roadmap Progression",
-    "futureItems": [
-      "Smart attendance & leave tracking",
-      "Compliant payroll calculation runs",
-      "Performance reviews & competency cycles",
-      "Social insurance & regulatory compliance",
-      "Extended enterprise integrations"
+    "SECURITY_CARDS": [
+        {
+            "id": "secure-access",
+            "title": "Secure Access",
+            "description": "Reliable authentication with 2-step verification safeguarding administrative portals.",
+            "iconName": "ShieldCheck"
+        },
+        {
+            "id": "structured-roles",
+            "title": "Structured Permissions",
+            "description": "Precise role governance for managers and branch leads based on functional scopes.",
+            "iconName": "LockKeyhole"
+        },
+        {
+            "id": "private-data",
+            "title": "Dedicated Company Data",
+            "description": "Complete workspace isolation ensuring your organizational records remain exclusively yours.",
+            "iconName": "Building2"
+        },
+        {
+            "id": "sensitive-protection",
+            "title": "Protection of Sensitive Records",
+            "description": "Comprehensive audit trails tracking administrative changes and file exports with accountability.",
+            "iconName": "FileCheck2"
+        }
     ],
-    "pricingEyebrow": "Transparent Plans",
-    "pricingHeadline": "Choose the plan tailored to your stage of growth",
-    "pricingSubtitle": "Clear terms to organize your team without hidden costs or surprises.",
-    "popularBadge": "Most popular",
-    "faqEyebrow": "Clear Answers",
-    "faqHeadline": "Frequently Asked Questions",
-    "faqSubtitle": "Everything you need to know about getting organized with Taqfel HR.",
-    "finalCtaHeadline": "Start building a more organized company today.",
-    "finalCtaDesc": "One simple step to organize your team and branches, saving hours of recurring administrative work.",
-    "footerDesc": "A modern platform to organize company structures, employees, branches, and internal users for businesses in Egypt and the MENA region.",
-    "footerColPlatform": "Platform",
-    "footerColCompany": "Company",
-    "footerColLegal": "Legal & Compliance",
-    "footerPrivacy": "Privacy Policy",
-    "footerTerms": "Terms of Service",
-    "footerSecurity": "Data Security",
-    "footerContact": "Contact Support",
-    "footerCopyright": "All rights reserved © Taqfel HR Enterprise.",
-    "demoWatermark": "Product Preview — Demo Data"
-  },
-  "DEMO_METRICS": [
-    {
-      "id": "employees",
-      "label": "Total Employees",
-      "value": "248",
-      "subtext": "241 Active • 7 On Leave",
-      "trend": "+12 this month",
-      "badge": "Active",
-      "variant": "emerald"
-    },
-    {
-      "id": "branches",
-      "label": "Operational Branches",
-      "value": "4",
-      "subtext": "Cairo, Alexandria, Giza, Mansoura",
-      "trend": "Full coverage",
-      "badge": "Stable",
-      "variant": "lime"
-    },
-    {
-      "id": "users",
-      "label": "Internal Users",
-      "value": "12",
-      "subtext": "4 System Admins • 8 Managers",
-      "trend": "Scoped access",
-      "badge": "Secured",
-      "variant": "slate"
-    },
-    {
-      "id": "records",
-      "label": "Profile Completion",
-      "value": "98.4%",
-      "subtext": "Employment record health",
-      "trend": "Live sync",
-      "badge": "Up to date",
-      "variant": "emerald"
+    "PRICING_PLANS": [
+        {
+            "id": "starter",
+            "name": "Starter",
+            "target": "For Small Businesses",
+            "description": "The solid foundation to organize employees and manage your initial branches cleanly.",
+            "features": [
+                "Management for up to 2 operational branches",
+                "Centralized employee profiles & records",
+                "Bulk data import via Excel",
+                "2 administrative users with scoped roles",
+                "Operational dashboard & overview metrics"
+            ],
+            "ctaText": "Get started"
+        },
+        {
+            "id": "business",
+            "name": "Business",
+            "target": "For Growing Companies",
+            "description": "The ideal solution for expanding organizations with multiple branches and teams.",
+            "isPopular": true,
+            "features": [
+                "Multi-branch management without artificial caps",
+                "Advanced employee records & department groupings",
+                "Multi-tiered administrative roles & permissions",
+                "Fast Excel data import and validation engine",
+                "Structured reports ready for review and audit",
+                "Dedicated onboarding support"
+            ],
+            "ctaText": "Get started"
+        },
+        {
+            "id": "enterprise",
+            "name": "Enterprise",
+            "target": "For Larger Enterprises",
+            "description": "Comprehensive setup for multi-entity groups and complex organizational structures.",
+            "features": [
+                "Multi-company hierarchy & complex org trees",
+                "Custom role governance per division and city",
+                "Full administrative audit trails and activity logs",
+                "Custom import templates and operational workflows",
+                "Dedicated account manager & guided rollout"
+            ],
+            "ctaText": "Contact us"
+        }
+    ],
+    "FAQ_ITEMS": [
+        {
+            "id": "faq-1",
+            "question": "Is the platform suitable for small businesses?",
+            "answer": "Absolutely. The platform is intentionally built without unnecessary complexity, enabling small businesses and startups to organize employee profiles and branch structures in minutes without lengthy onboarding."
+        },
+        {
+            "id": "faq-2",
+            "question": "Can I manage multiple branches?",
+            "answer": "Yes. You can configure full branch hierarchies (headquarters, regional offices, retail hubs), link every team member to their respective branch and department, and assign scoped permissions to branch leads."
+        },
+        {
+            "id": "faq-3",
+            "question": "Can employees and branches be imported via Excel?",
+            "answer": "Yes. The platform includes a dedicated Excel (.xlsx / .csv) bulk import workflow. Download the ready-to-use template, fill in your employee and branch details, and the validation engine imports hundreds of records cleanly."
+        },
+        {
+            "id": "faq-4",
+            "question": "Can multiple administrators access the system?",
+            "answer": "Yes. You can invite multiple administrative users with granular permission controls tailored to their roles — such as General Manager, HR Lead, or Regional Branch Supervisor."
+        },
+        {
+            "id": "faq-5",
+            "question": "Does the platform support both Arabic and English?",
+            "answer": "Yes. The platform is designed RTL-first for Arabic and fully supports English (LTR) with effortless switching to accommodate multinational and regional teams."
+        },
+        {
+            "id": "faq-6",
+            "question": "How do I get started?",
+            "answer": "You can get started immediately by clicking \"Get started\", setting up your company workspace, configuring your first branch, and exploring the bulk employee import."
+        }
+    ],
+    "AUTH": {
+        "brandName": "Taqfel HR",
+        "brandSubtitle": "Enterprise",
+        "switchLang": "العربية",
+        "switchLangShort": "عربي",
+        "needHelp": "Need help?",
+        "stepCompany": "Company",
+        "stepAccount": "Account",
+        "stepVerify": "Verify",
+        "stepSetup": "Setup",
+        "stepReady": "Ready",
+        "loginTitle": "Welcome back",
+        "loginSubtitle": "Sign in to your company workspace.",
+        "loginEmail": "Email",
+        "loginEmailPlaceholder": "Enter your email",
+        "loginPassword": "Password",
+        "loginPasswordPlaceholder": "Enter your password",
+        "loginSubmit": "Sign in",
+        "loginForgotPassword": "Forgot password?",
+        "loginCreateCompany": "Create a new company",
+        "loginNoAccount": "Don't have an account?",
+        "loginLoading": "Signing in...",
+        "loginInvalidCredentials": "Invalid email or password.",
+        "loginAccountLocked": "Your account has been temporarily locked. Please try again later.",
+        "loginRateLimited": "Too many login attempts. Please wait before trying again.",
+        "loginUnexpectedError": "An unexpected error occurred. Please try again.",
+        "loginEmailNotVerified": "Your account requires email verification.",
+        "loginResendVerification": "Resend verification link",
+        "signupCompanyTitle": "Tell us about your company",
+        "signupCompanySubtitle": "Let's start with some basic information to create your company workspace.",
+        "signupCompanyName": "Company name",
+        "signupCompanyNamePlaceholder": "e.g., Al-Amal Company",
+        "signupFullName": "Full name",
+        "signupFullNamePlaceholder": "Administrator's full name",
+        "signupEmail": "Official email",
+        "signupEmailPlaceholder": "admin@company.com",
+        "signupPhone": "Phone number",
+        "signupPhonePlaceholder": "+20 1XX XXX XXXX",
+        "signupContinue": "Continue",
+        "signupBack": "Back",
+        "signupHaveAccount": "Already have an account?",
+        "signupLogin": "Sign in",
+        "signupAccountTitle": "Create admin account",
+        "signupAccountSubtitle": "This account will manage your company workspace.",
+        "signupPassword": "Password",
+        "signupPasswordPlaceholder": "Create a strong password",
+        "signupConfirmPassword": "Confirm password",
+        "signupConfirmPasswordPlaceholder": "Re-enter your password",
+        "signupCreateAccount": "Create account",
+        "signupCreating": "Creating your company workspace...",
+        "signupPrivacyNote": "Your data is protected and will not be shared with third parties.",
+        "signupPasswordShow": "Show password",
+        "signupPasswordHide": "Hide password",
+        "verifyTitle": "Check your email",
+        "verifySubtitle": "We sent an activation link to your email address.",
+        "verifySentTo": "Sent to",
+        "verifyResend": "Resend link",
+        "verifyChangeEmail": "Change email",
+        "verifyBackToLogin": "Back to sign in",
+        "verifyResendSuccess": "A new link has been sent",
+        "verifyResendCooldown": "You can resend after",
+        "verifySeconds": "seconds",
+        "verifyTooManyAttempts": "Maximum resend attempts reached. Please try again later.",
+        "verifySuccessTitle": "Email verified",
+        "verifySuccessSubtitle": "Your account has been activated. You can now continue setting up your company.",
+        "verifySuccessContinue": "Continue",
+        "verifyExpiredTitle": "Activation link expired",
+        "verifyExpiredSubtitle": "Please request a new activation link.",
+        "verifyExpiredResend": "Send new link",
+        "verifyInvalidTitle": "Invalid activation link",
+        "verifyInvalidSubtitle": "This link is invalid or has already been used.",
+        "verifyInvalidResend": "Send new link",
+        "forgotTitle": "Recover password",
+        "forgotSubtitle": "Enter the email associated with your account.",
+        "forgotEmail": "Email",
+        "forgotEmailPlaceholder": "Enter your email",
+        "forgotSubmit": "Send recovery link",
+        "forgotSending": "Sending...",
+        "forgotSuccessTitle": "Check your email",
+        "forgotSuccessSubtitle": "If you have a registered account, you will receive a password recovery link.",
+        "forgotBackToLogin": "Back to sign in",
+        "resetTitle": "Set new password",
+        "resetSubtitle": "Create a new password for your account.",
+        "resetNewPassword": "New password",
+        "resetNewPasswordPlaceholder": "Enter your new password",
+        "resetConfirmPassword": "Confirm password",
+        "resetConfirmPlaceholder": "Re-enter your new password",
+        "resetSubmit": "Change password",
+        "resetSubmitting": "Changing...",
+        "resetSuccessTitle": "Password changed",
+        "resetSuccessSubtitle": "You can now sign in with your new password.",
+        "resetSuccessLogin": "Sign in",
+        "resetExpiredTitle": "Link expired",
+        "resetExpiredSubtitle": "Please request a new recovery link.",
+        "resetExpiredAction": "Request new link",
+        "resetInvalidTitle": "Invalid link",
+        "resetInvalidSubtitle": "This link is invalid or has already been used.",
+        "resetInvalidAction": "Request new link",
+        "twoFactorTitle": "Additional verification",
+        "twoFactorSubtitle": "Enter the verification code to complete sign in.",
+        "twoFactorCode": "Verification code",
+        "twoFactorCodePlaceholder": "------",
+        "twoFactorVerify": "Verify",
+        "twoFactorVerifying": "Verifying...",
+        "twoFactorResend": "Send new code",
+        "twoFactorAlternative": "Use another method",
+        "twoFactorInvalidCode": "The code entered is incorrect. Please try again.",
+        "onboardingStructureTitle": "How does your company work?",
+        "onboardingStructureSubtitle": "Choose the right structure for your company.",
+        "onboardingSingleTitle": "Single location",
+        "onboardingSingleDesc": "A team working directly under the company.",
+        "onboardingBranchesTitle": "Multiple branches",
+        "onboardingBranchesDesc": "Organize employees across one or more branches.",
+        "onboardingContinue": "Continue",
+        "onboardingTeamTitle": "Start adding your team",
+        "onboardingBranchSetupTitle": "Add your company branches",
+        "onboardingAddEmployee": "Add employees",
+        "onboardingImportExcel": "Import from Excel",
+        "onboardingSkip": "Skip for now",
+        "onboardingAddBranch": "Add branch",
+        "onboardingAddAnotherBranch": "Add another branch",
+        "onboardingBranchName": "Branch name",
+        "onboardingBranchNamePlaceholder": "e.g., Main branch",
+        "onboardingCompleteTitle": "Your company is ready",
+        "onboardingCompleteSubtitle": "You can now start managing your company from the workspace.",
+        "onboardingGoToDashboard": "Go to dashboard",
+        "footerPrivacy": "Privacy",
+        "footerTerms": "Terms",
+        "footerCopyright": "© 2026 Taqfel HR. All rights reserved.",
+        "metaLoginTitle": "Sign In | Taqfel HR",
+        "metaSignupTitle": "Create Company Account | Taqfel HR",
+        "metaVerifyTitle": "Verify Email | Taqfel HR",
+        "metaForgotTitle": "Recover Password | Taqfel HR",
+        "metaResetTitle": "Reset Password | Taqfel HR",
+        "metaTwoFactorTitle": "Verification | Taqfel HR",
+        "metaOnboardingTitle": "Company Setup | Taqfel HR"
     }
-  ],
-  "DEMO_EMPLOYEES": [
-    {
-      "id": "EMP-1042",
-      "name": "Ahmed M. El-Sherif",
-      "role": "Operations Director",
-      "department": "General Management",
-      "branch": "HQ - Maadi",
-      "status": "active",
-      "joinedDate": "Jan 15, 2022",
-      "avatarSeed": "AS"
-    },
-    {
-      "id": "EMP-1088",
-      "name": "Mariam T. El-Awady",
-      "role": "Senior People Specialist",
-      "department": "Human Resources",
-      "branch": "HQ - Maadi",
-      "status": "active",
-      "joinedDate": "Mar 01, 2023",
-      "avatarSeed": "MA"
-    },
-    {
-      "id": "EMP-1115",
-      "name": "Karim H. El-Deeb",
-      "role": "Alexandria Branch Manager",
-      "department": "Branch Operations",
-      "branch": "Alexandria - Smouha",
-      "status": "active",
-      "joinedDate": "Aug 10, 2023",
-      "avatarSeed": "KD"
-    },
-    {
-      "id": "EMP-1142",
-      "name": "Sara A. Kamal",
-      "role": "Payroll & Cost Accountant",
-      "department": "Finance",
-      "branch": "Giza - Mohandessin",
-      "status": "active",
-      "joinedDate": "Dec 05, 2023",
-      "avatarSeed": "SK"
-    },
-    {
-      "id": "EMP-1190",
-      "name": "Omar N. El-Zahed",
-      "role": "Logistics Supervisor",
-      "department": "Operations & Support",
-      "branch": "Delta - Mansoura",
-      "status": "leave",
-      "joinedDate": "Mar 20, 2024",
-      "avatarSeed": "OZ"
-    }
-  ],
-  "DEMO_BRANCHES": [
-    {
-      "id": "BR-01",
-      "name": "Headquarters (Maadi)",
-      "city": "Cairo",
-      "employeeCount": 142,
-      "manager": "Ahmed M. El-Sherif",
-      "code": "CAI-HQ"
-    },
-    {
-      "id": "BR-02",
-      "name": "Alexandria Branch (Smouha)",
-      "city": "Alexandria",
-      "employeeCount": 48,
-      "manager": "Karim H. El-Deeb",
-      "code": "ALX-01"
-    },
-    {
-      "id": "BR-03",
-      "name": "Giza Branch (Mohandessin)",
-      "city": "Giza",
-      "employeeCount": 36,
-      "manager": "Sara A. Kamal",
-      "code": "GZA-01"
-    },
-    {
-      "id": "BR-04",
-      "name": "Delta Branch (Mansoura)",
-      "city": "Dakahlia",
-      "employeeCount": 22,
-      "manager": "Omar N. El-Zahed",
-      "code": "MNZ-01"
-    }
-  ],
-  "VALUE_PROPOSITIONS": [
-    {
-      "number": "01",
-      "title": "Simpler",
-      "description": "Clear management without unnecessary complexity, focused on what matters."
-    },
-    {
-      "number": "02",
-      "title": "Clearer",
-      "description": "Complete and direct visibility into your company, branches, and team in one interface."
-    },
-    {
-      "number": "03",
-      "title": "Flexible",
-      "description": "Adapts seamlessly to different company sizes, organizational structures, and branches."
-    },
-    {
-      "number": "04",
-      "title": "Ready to Grow",
-      "description": "Start with what you need today and scale confidently as your organization expands."
-    }
-  ],
-  "SECURITY_CARDS": [
-    {
-      "id": "secure-access",
-      "title": "Secure Access",
-      "description": "Reliable authentication with 2-step verification safeguarding administrative portals.",
-      "iconName": "ShieldCheck"
-    },
-    {
-      "id": "structured-roles",
-      "title": "Structured Permissions",
-      "description": "Precise role governance for managers and branch leads based on functional scopes.",
-      "iconName": "LockKeyhole"
-    },
-    {
-      "id": "private-data",
-      "title": "Dedicated Company Data",
-      "description": "Complete workspace isolation ensuring your organizational records remain exclusively yours.",
-      "iconName": "Building2"
-    },
-    {
-      "id": "sensitive-protection",
-      "title": "Protection of Sensitive Records",
-      "description": "Comprehensive audit trails tracking administrative changes and file exports with accountability.",
-      "iconName": "FileCheck2"
-    }
-  ],
-  "PRICING_PLANS": [
-    {
-      "id": "starter",
-      "name": "Starter",
-      "target": "For Small Businesses",
-      "description": "The solid foundation to organize employees and manage your initial branches cleanly.",
-      "features": [
-        "Management for up to 2 operational branches",
-        "Centralized employee profiles & records",
-        "Bulk data import via Excel",
-        "2 administrative users with scoped roles",
-        "Operational dashboard & overview metrics"
-      ],
-      "ctaText": "Get started"
-    },
-    {
-      "id": "business",
-      "name": "Business",
-      "target": "For Growing Companies",
-      "description": "The ideal solution for expanding organizations with multiple branches and teams.",
-      "isPopular": true,
-      "features": [
-        "Multi-branch management without artificial caps",
-        "Advanced employee records & department groupings",
-        "Multi-tiered administrative roles & permissions",
-        "Fast Excel data import and validation engine",
-        "Structured reports ready for review and audit",
-        "Dedicated onboarding support"
-      ],
-      "ctaText": "Get started"
-    },
-    {
-      "id": "enterprise",
-      "name": "Enterprise",
-      "target": "For Larger Enterprises",
-      "description": "Comprehensive setup for multi-entity groups and complex organizational structures.",
-      "features": [
-        "Multi-company hierarchy & complex org trees",
-        "Custom role governance per division and city",
-        "Full administrative audit trails and activity logs",
-        "Custom import templates and operational workflows",
-        "Dedicated account manager & guided rollout"
-      ],
-      "ctaText": "Contact us"
-    }
-  ],
-  "FAQ_ITEMS": [
-    {
-      "id": "faq-1",
-      "question": "Is the platform suitable for small businesses?",
-      "answer": "Absolutely. The platform is intentionally built without unnecessary complexity, enabling small businesses and startups to organize employee profiles and branch structures in minutes without lengthy onboarding."
-    },
-    {
-      "id": "faq-2",
-      "question": "Can I manage multiple branches?",
-      "answer": "Yes. You can configure full branch hierarchies (headquarters, regional offices, retail hubs), link every team member to their respective branch and department, and assign scoped permissions to branch leads."
-    },
-    {
-      "id": "faq-3",
-      "question": "Can employees and branches be imported via Excel?",
-      "answer": "Yes. The platform includes a dedicated Excel (.xlsx / .csv) bulk import workflow. Download the ready-to-use template, fill in your employee and branch details, and the validation engine imports hundreds of records cleanly."
-    },
-    {
-      "id": "faq-4",
-      "question": "Can multiple administrators access the system?",
-      "answer": "Yes. You can invite multiple administrative users with granular permission controls tailored to their roles — such as General Manager, HR Lead, or Regional Branch Supervisor."
-    },
-    {
-      "id": "faq-5",
-      "question": "Does the platform support both Arabic and English?",
-      "answer": "Yes. The platform is designed RTL-first for Arabic and fully supports English (LTR) with effortless switching to accommodate multinational and regional teams."
-    },
-    {
-      "id": "faq-6",
-      "question": "How do I get started?",
-      "answer": "You can get started immediately by clicking \"Get started\", setting up your company workspace, configuring your first branch, and exploring the bulk employee import."
-    }
-  ]
 }

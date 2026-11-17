@@ -17,5 +17,50 @@
     "humanResources": "Human Resources",
     "operationsName": "Omar El-Shenawy",
     "operationsRole": "Operations Manager",
-    "operations": "Operations"
+    "operations": "Operations",
+    "defaults": {
+        "companyName": "Taqfel Tech Solutions",
+        "adminName": "Ahmed Mahmoud",
+        "adminRole": "Company Administrator",
+        "avatar": "AM",
+        "branches": {
+            "headquarters": "HQ - Cairo",
+            "alexandria": "Alexandria Branch",
+            "giza": "Giza Branch"
+        }
+    },
+    "tabs": {
+        "overview": "Overview",
+        "employees": "Employees",
+        "branches": "Branches"
+    },
+    "organization": {
+        "details": "Registered Organization Details",
+        "companyName": "Company Name",
+        "adminName": "Admin Name",
+        "adminEmail": "Admin Email",
+        "structure": "Company Structure",
+        "single": "Single Location",
+        "multiple": "Multi-Branch ({{count}})"
+    },
+    "status": {
+        "activation": "Activation Status",
+        "accountCreated": "Admin account created successfully",
+        "emailVerified": "Official email verified",
+        "structureInitialized": "Structure and branches initialized",
+        "apiReady": "Ready for API backend integration"
+    },
+    "employees": {
+        "title": "Team Members & Staff",
+        "count": "Members",
+        "employee": "Employee",
+        "role": "Role",
+        "branch": "Branch",
+        "status": "Status"
+    },
+    "branches": {
+        "title": "Branches & Locations",
+        "count": "Branches",
+        "active": "Active operational branch"
+    }
 }

@@ -27,9 +27,7 @@ function applyDocumentDirection(lng: string) {
 
     document.documentElement.setAttribute('dir', dir);
     document.documentElement.setAttribute('lang', normalizedLang);
-    document.title = isArabic
-        ? 'تقفيل | لوحة إدارة الموارد البشرية'
-        : 'Taqfel HR Dashboard';
+    document.title = i18n.t('meta.title');
 }
 
 i18n
@@ -43,9 +41,8 @@ i18n
         supportedLngs: ['ar', 'en'],
         nonExplicitSupportedLngs: true,
         detection: {
-            // الأولوية للرابط القادم من Landing Page ثم التخزين المحلي
-            order: ['querystring', 'localStorage', 'navigator'],
-            lookupQuerystring: 'lang',
+            order: ['path', 'localStorage', 'navigator'],
+            lookupFromPathIndex: 0,
             lookupLocalStorage: 'portal_lang',
             caches: ['localStorage'],
         },

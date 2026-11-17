@@ -4,9 +4,9 @@
  * render its own <html> or <body> tags.
  */
 export default function AuthGroupLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  return <>{children}</>;
+    return <>{children}</>;
 }

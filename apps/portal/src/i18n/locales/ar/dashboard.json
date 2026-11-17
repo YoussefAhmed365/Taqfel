@@ -17,5 +17,50 @@
     "humanResources": "الموارد البشرية",
     "operationsName": "عمر فاروق الشناوي",
     "operationsRole": "مدير العمليات التشغيلية",
-    "operations": "العمليات"
+    "operations": "العمليات",
+    "defaults": {
+        "companyName": "شركة تقفيل للحلول البرمجية",
+        "adminName": "أحمد محمود",
+        "adminRole": "مدير المنشأة",
+        "avatar": "أم",
+        "branches": {
+            "headquarters": "المقر الرئيسي - القاهرة",
+            "alexandria": "فرع الإسكندرية",
+            "giza": "فرع الجيزة"
+        }
+    },
+    "tabs": {
+        "overview": "نظرة عامة",
+        "employees": "سجل الموظفين",
+        "branches": "الفروع التشغيلية"
+    },
+    "organization": {
+        "details": "تفاصيل المنشأة المسجلة",
+        "companyName": "اسم المنشأة",
+        "adminName": "مدير الحساب",
+        "adminEmail": "البريد الإلكتروني",
+        "structure": "الهيكل الإداري",
+        "single": "مقر واحد فقط",
+        "multiple": "فروع متعددة ({{count}})"
+    },
+    "status": {
+        "activation": "حالة التفعيل والجاهزية",
+        "accountCreated": "تم إنشاء حساب المسؤول بنجاح",
+        "emailVerified": "تم تأكيد البريد الإلكتروني رسمياً",
+        "structureInitialized": "تم اعتماد الهيكل التنظيمي والفروع",
+        "apiReady": "المنظومة بانتظار اتصال واجهة برمجة التطبيقات (API)"
+    },
+    "employees": {
+        "title": "قائمة أعضاء الفريق والمشرفين",
+        "count": "أعضاء",
+        "employee": "الموظف",
+        "role": "الدور الوظيفي",
+        "branch": "الفرع",
+        "status": "الحالة"
+    },
+    "branches": {
+        "title": "الفروع والمقرات التابعة",
+        "count": "فروع",
+        "active": "فرع تشغيلي نشط"
+    }
 }

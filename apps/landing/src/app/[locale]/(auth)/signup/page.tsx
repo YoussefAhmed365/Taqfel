@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { AuthLanguageProvider, useAuthLanguage } from '../../../../../components/auth/auth-language-context';
 import { AuthShell, AuthHeading } from '../../../../../components/auth/auth-shell';
@@ -12,88 +11,85 @@ import { authService } from '../../../../../lib/auth/service';
 import type { CompanyFormData, AccountFormData } from '../../../../../lib/auth/validation';
 
 function SignupFlow() {
-  const { t, lang } = useAuthLanguage();
-  const router = useRouter();
+    const { t, lang } = useAuthLanguage();
+    const router = useRouter();
 
-  const [step, setStep] = useState<'company' | 'account'>('company');
-  const [companyData, setCompanyData] = useState<CompanyFormData | null>(null);
+    const [step, setStep] = useState<'company' | 'account'>('company');
+    const [companyData, setCompanyData] = useState<CompanyFormData | null>(null);
 
-  const handleCompanySubmit = useCallback((data: CompanyFormData) => {
-    setCompanyData(data);
-    setStep('account');
-  }, []);
+    const handleCompanySubmit = useCallback((data: CompanyFormData) => {
+        setCompanyData(data);
+        setStep('account');
+    }, []);
 
-  const handleAccountSubmit = useCallback(
-    async (data: AccountFormData) => {
-      if (!companyData) return;
+    const handleAccountSubmit = useCallback(
+        async (data: AccountFormData) => {
+            if (!companyData) return;
 
-      const response = await authService.signup({
-        companyName: companyData.companyName,
-        fullName: companyData.fullName,
-        email: companyData.email,
-        phone: companyData.phone,
-        password: data.password,
-      });
+            const response = await authService.signup({
+                companyName: companyData.companyName,
+                fullName: companyData.fullName,
+                email: companyData.email,
+                phone: companyData.phone,
+                password: data.password,
+            });
 
-      if (response.success) {
-        // Redirect to email verification
-        router.push(`/${lang}/verify-email?email=${encodeURIComponent(companyData.email)}`);
-      }
-    },
-    [companyData, lang, router]
-  );
+            if (response.success) {
+                // Redirect to email verification
+                router.push(`/${lang}/verify-email?email=${encodeURIComponent(companyData.email)}`);
+            }
+        },
+        [companyData, lang, router]
+    );
 
-  const handleBack = useCallback(() => {
-    setStep('company');
-  }, []);
+    const handleBack = useCallback(() => {
+        setStep('company');
+    }, []);
 
-  const currentStepIndex = step === 'company' ? 0 : 1;
+    const currentStepIndex = step === 'company' ? 0 : 1;
 
-  return (
-    <AuthShell width="medium">
-      {/* Progress indicator */}
-      <div className="mb-8">
-        <AuthProgress currentStep={currentStepIndex} />
-      </div>
+    return (
+        <AuthShell width="medium">
+            {/* Progress indicator */}
+            <div className="mb-8">
+                <AuthProgress currentStep={currentStepIndex} />
+            </div>
 
-      {/* Step content */}
-      {step === 'company' && (
-        <div className="animate-fadeIn">
-          <AuthHeading
-            title={t.signupCompanyTitle}
-            subtitle={t.signupCompanySubtitle}
-          />
-          <CompanyForm
-            initialData={companyData || undefined}
-            onSubmit={handleCompanySubmit}
-          />
-        </div>
-      )}
+            {/* Step content */}
+            {step === 'company' && (
+                <div className="animate-fadeIn">
+                    <AuthHeading
+                        title={t.signupCompanyTitle}
+                        subtitle={t.signupCompanySubtitle}
+                    />
+                    <CompanyForm
+                        initialData={companyData || undefined}
+                        onSubmit={handleCompanySubmit}
+                    />
+                </div>
+            )}
 
-      {step === 'account' && companyData && (
-        <div className="animate-fadeIn">
-          <AuthHeading
-            title={t.signupAccountTitle}
-            subtitle={t.signupAccountSubtitle}
-          />
-          <AdminForm
-            email={companyData.email}
-            onSubmit={handleAccountSubmit}
-            onBack={handleBack}
-          />
-        </div>
-      )}
-    </AuthShell>
-  );
+            {step === 'account' && companyData && (
+                <div className="animate-fadeIn">
+                    <AuthHeading
+                        title={t.signupAccountTitle}
+                        subtitle={t.signupAccountSubtitle}
+                    />
+                    <AdminForm
+                        email={companyData.email}
+                        onSubmit={handleAccountSubmit}
+                        onBack={handleBack}
+                    />
+                </div>
+            )}
+        </AuthShell>
+    );
 }
 
 export default function SignupPage() {
-  const params = useParams();
-  const locale = (params?.locale as string) || 'ar';
-
-  return (
-    <AuthLanguageProvider initialLocale={locale}>
-      <SignupFlow />
-    </AuthLanguageProvider>
-  );
+    return (
+        <AuthLanguageProvider>
+            <SignupFlow />
+        </AuthLanguageProvider>
+    );
 }

@@ -1,25 +1,38 @@
 {
-  "platformSubtitle": "HR Management Platform",
-  "searchPlaceholder": "Search employee, branch...",
-  "workspace": "Workspace",
-  "nav": {
-    "dashboard": "Dashboard",
-    "employees": "Employees",
-    "branches": "Branches",
-    "roles": "Roles & Access",
-    "import": "Data Import",
-    "settings": "Settings"
-  },
-  "actions": {
-    "switchLanguage": "التبديل إلى العربية",
-    "fullscreen": "Fullscreen",
-    "exitFullscreen": "Exit Fullscreen",
-    "resetDemo": "Reset Demo",
-    "logout": "Logout"
-  },
-  "recordHealth": {
-    "title": "Record Health",
-    "verifiedProfiles_one": "{{count}} active verified profile",
-    "verifiedProfiles_other": "{{count}} active verified profiles"
-  }
+	"platformSubtitle": "HR Management Platform",
+	"searchPlaceholder": "Search employee, branch...",
+	"workspace": "Workspace",
+	"nav": {
+		"dashboard": "Dashboard",
+		"employees": "Employees",
+		"branches": "Branches",
+		"roles": "Roles & Access",
+		"import": "Data Import",
+		"settings": "Settings"
+	},
+	"actions": {
+		"switchLanguage": "التبديل إلى العربية",
+		"fullscreen": "Fullscreen",
+		"exitFullscreen": "Exit Fullscreen",
+		"resetDemo": "Reset Demo",
+		"logout": "Logout"
+	},
+	"recordHealth": {
+		"title": "Record Health",
+		"verifiedProfiles_one": "{{count}} active verified profile",
+		"verifiedProfiles_other": "{{count}} active verified profiles"
+	},
+	"defaults": {
+		"companyName": "Taqfel Tech & Services SAE",
+		"userName": "Ahmed El-Sherif",
+		"userRole": "General Admin",
+		"avatar": "AS"
+	},
+	"status": {
+		"active": "Active",
+		"leave": "Leave"
+	},
+	"meta": {
+		"title": "Taqfel HR Dashboard"
+	}
 }

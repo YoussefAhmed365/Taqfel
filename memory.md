@@ -1,46 +1,43 @@
-# Memory — Landing Lint Cleanup
+# Memory — Translation Configuration Improvements
 
-Last updated: 2026-11-16T09:05:22+02:00
+Last updated: 2026-11-17T13:15:48+02:00
 
 ## What was built
 
-- Cleaned all reported landing ESLint findings across auth, home, UI, i18n,
-  route, and auth-service files.
-- Replaced internal navigation assignments with Next.js router/Link usage while
-  preserving locale paths and the portal handoff.
-- Replaced explicit `any` usages with existing message/domain types and narrow
-  timer/item types.
-- Removed unused imports, variables, and parameters, and refactored the
-  two-factor and dashboard state flows to avoid linted synchronous effect
-  updates.
+- Portal now uses `/en` and `/ar` as canonical locale routes, with legacy root/dashboard paths redirecting to `/en`.
+- Portal language detection now reads the locale path, then `portal_lang` local storage, then the browser language.
+- Portal dashboard and shell labels were moved into the existing `common` and `dashboard` i18next namespaces.
+- Portal metadata title is translated through the i18next resources.
+- Landing auth translations were migrated into the `AUTH` section of `messages/en.json` and `messages/ar.json`.
+- Landing auth language state now uses next-intl route locale and navigation instead of independent React state.
+- Landing metadata is generated per locale through the `META` message section.
+- Landing-to-portal handoffs now open `/<locale>` instead of `?lang=`.
+- The unused home `LanguageProvider` wrapper and obsolete standalone auth i18n files were removed.
 
 ## Decisions made
 
-- Kept the portal handoff as a full-page navigation because it targets a
-  separate app URL; internal landing routes use Next.js client navigation.
-- Preserved dashboard local-storage hydration timing by deferring the initial
-  company read through `requestAnimationFrame`.
+- Kept i18next in portal and next-intl in landing.
+- Canonical locale URLs are `/en` and `/ar` in both apps.
+- Local storage is not treated as shared state between apps; route URLs are the cross-app contract.
 
 ## Problems solved
 
-- `pnpm --filter landing lint` initially reported 10 errors and 31 warnings.
-- The final lint run exits successfully with zero errors and zero warnings.
-- The landing TypeScript check also exits successfully.
+- Auth language switching no longer diverges from the landing URL/server locale.
+- Portal refreshes preserve the locale through the path rather than query-string state.
+- Portal and landing metadata now follow the active locale.
 
 ## Current state
 
-- Landing lint and type validation pass.
-- `git diff --check` passes.
-- The worktree contains unrelated pre-existing changes; they were not reverted
-  or modified as part of this cleanup.
+- Portal typecheck, lint, and production build pass.
+- Landing typecheck and lint pass.
+- Landing production compilation succeeds, but `next build` stops because the installed Next.js version triggers Next.js security-vulnerability upgrade enforcement.
+- No security dependency upgrade was performed.
 
 ## Next session starts with
 
-- Continue wiring the mock `authService` to actual backend endpoints and verify
-  session/cookie handling across the landing and portal apps.
+- Decide whether to run the requested Next.js security upgrade in the current checkout or a separate Git worktree, then rerun the landing production build.
 
 ## Open questions
 
-- Decide whether production JWT sessions should be handled by Next.js Middleware
-  or shared client-side context/cookies across the landing and portal apps.
-- Confirm the final backend authentication and onboarding routes.
+- Whether to finish migrating remaining hardcoded demo/home strings in landing components into message keys.
+- Whether to upgrade Next.js immediately using the security upgrade command.
