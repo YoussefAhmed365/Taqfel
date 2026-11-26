@@ -60,7 +60,13 @@ model Organization {
   // }
   overrides Json?
 
-  payrollCycleDay Int @default(1)
+  payrollCycleDay     Int     @default(1)
+  contactPhone        String?
+  onboardingCompleted Boolean @default(false)
+
+  // Default / Active statutory insurance rule reference
+  insuranceRuleId String?        @db.Uuid
+  insuranceRule   InsuranceRule? @relation(fields: [insuranceRuleId], references: [id])
 
   // Activity indicators for super admin
   lastPayrollActivity    DateTime?
@@ -76,24 +82,39 @@ model Organization {
   invitations Invitation[]
   auditLogs   AuditLog[]
 
-  attendanceSettings     AttendanceSettings?
-  attendanceRecords      AttendanceRecord[]
-  employeeShifts         EmployeeShift[]
-  shiftExceptions        ShiftException[]
-  deductionPolicy        DeductionPolicy?
-  overtimeApprovals      OvertimeApproval[]
-  leaveRequests          LeaveRequest[]
-  organizationHolidays   OrganizationHoliday[]
-  allowanceTypes         AllowanceType[]
-  employeeAllowances     EmployeeAllowance[]
-  advances               Advance[]
-  payrollRuns            PayrollRun[]
-  payrollItems           PayrollItem[]
-  kpiGoals               KPIGoal[]
-  incidents              EmployeeIncident[]
-  performanceReviews     PerformanceReview[]
-  notificationThresholds NotificationThreshold[]
-  notifications          Notification[]
+  attendanceSettings       AttendanceSettings?
+  attendanceRecords        AttendanceRecord[]
+  employeeShifts           EmployeeShift[]
+  shiftExceptions          ShiftException[]
+  weekendConfigs           WeekendConfig[]
+  deductionPolicy          DeductionPolicy?
+  overtimeApprovals        OvertimeApproval[]
+  leaveRequests            LeaveRequest[]
+  leaveBalances            LeaveBalance[]
+  organizationHolidays     OrganizationHoliday[]
+  allowanceTypes           AllowanceType[]
+  employeeAllowances       EmployeeAllowance[]
+  advances                 Advance[]
+  advanceInstallments      AdvanceInstallment[]
+  payrollRuns              PayrollRun[]
+  payrollItems             PayrollItem[]
+  taxProfiles              TaxProfile[]
+  taxableEarningsConfigs   TaxableEarningsConfig[]
+  flexibleContributions    FlexibleContribution[]
+  annualTaxReconciliations AnnualTaxReconciliation[]
+  taxAuditLogs             TaxAuditLog[]
+  kpiSettings              KPISettings?
+  kpiTemplates             KPITemplate[]
+  kpiGoals                 KPIGoal[]
+  kpiResults               KPIResult[]
+  incidents                EmployeeIncident[]
+  performanceReviews       PerformanceReview[]
+  employeeDocuments        EmployeeDocument[]
+  employeeLifecycleEvents  EmployeeLifecycleEvent[]
+  bulkImportJobs           BulkImportJob[]
+  notificationThresholds   NotificationThreshold[]
+  notifications            Notification[]
+  oviConversations         OviConversation[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -123,19 +144,28 @@ model Branch {
   members     Member[]
   employees   Employee[]
   invitations Invitation[]
+  auditLogs   AuditLog[]
 
-  attendanceRecords  AttendanceRecord[]
-  employeeShifts     EmployeeShift[]
-  shiftExceptions    ShiftException[]
-  overtimeApprovals  OvertimeApproval[]
-  leaveRequests      LeaveRequest[]
-  employeeAllowances EmployeeAllowance[]
-  advances           Advance[]
-  payrollItems       PayrollItem[]
-  kpiGoals           KPIGoal[]
-  incidents          EmployeeIncident[]
-  performanceReviews PerformanceReview[]
-  notifications      Notification[]
+  attendanceRecords        AttendanceRecord[]
+  employeeShifts           EmployeeShift[]
+  shiftExceptions          ShiftException[]
+  weekendConfigs           WeekendConfig[]
+  overtimeApprovals        OvertimeApproval[]
+  leaveRequests            LeaveRequest[]
+  leaveBalances            LeaveBalance[]
+  employeeAllowances       EmployeeAllowance[]
+  advances                 Advance[]
+  advanceInstallments      AdvanceInstallment[]
+  payrollItems             PayrollItem[]
+  kpiGoals                 KPIGoal[]
+  kpiResults               KPIResult[]
+  incidents                EmployeeIncident[]
+  performanceReviews       PerformanceReview[]
+  employeeDocuments        EmployeeDocument[]
+  employeeLifecycleEvents  EmployeeLifecycleEvent[]
+  bulkImportJobs           BulkImportJob[]
+  annualTaxReconciliations AnnualTaxReconciliation[]
+  notifications            Notification[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -145,7 +175,7 @@ model Branch {
 }
 
 // ==========================================
-// 4. Users & Auth (Better Auth Core + Org Plugin)
+// 4. Users & Auth (Better Auth Core + Org Plugin + 2FA Plugin)
 // ==========================================
 model User {
   id            String  @id @default(uuid(7)) @db.Uuid
@@ -153,13 +183,14 @@ model User {
   email         String  @unique
   emailVerified Boolean @default(false)
   image         String?
+  phone         String?
 
-  role                 String  @default("user")
-  isActive             Boolean @default(true)
-  twoFactorEnabled     Boolean @default(false)
-  twoFactorSecret      String?
-  twoFactorBackupCodes String?
+  role             String  @default("user")
+  isActive         Boolean @default(true)
+  twoFactorEnabled Boolean @default(false)
 
+  twoFactor       TwoFactor?
+  platformAdmin   PlatformAdmin?
   employeeProfile Employee?
   sessions        Session[]
   accounts        Account[]
@@ -167,15 +198,45 @@ model User {
   members         Member[]
   invitations     Invitation[]
 
-  // Approver relations (the authenticated User performs these actions)
-  approvedOvertimes OvertimeApproval[]  @relation("OvertimeApprover")
-  approvedLeaves    LeaveRequest[]      @relation("LeaveApprover")
-  createdReviews    PerformanceReview[] @relation("ReviewCreator")
+  // Approver / Creator / Operational Audit relations (the authenticated User performs these actions)
+  approvedOvertimes     OvertimeApproval[]       @relation("OvertimeApprover")
+  approvedLeaves        LeaveRequest[]           @relation("LeaveApprover")
+  createdReviews        PerformanceReview[]      @relation("ReviewCreator")
+  reportedIncidents     EmployeeIncident[]       @relation("IncidentReporter")
+  checkedInAttendances  AttendanceRecord[]       @relation("AttendanceChecker")
+  closedPayrollRuns     PayrollRun[]             @relation("PayrollRunCloser")
+  notificationReads     NotificationRead[]
+  resolvedNotifications Notification[]           @relation("NotificationResolver")
+  lifecycleEvents       EmployeeLifecycleEvent[]
+  bulkImportJobs        BulkImportJob[]
+  taxAuditLogs          TaxAuditLog[]
+  oviConversations      OviConversation[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("user")
+}
+
+model PlatformAdmin {
+  id           String   @id @default(uuid(7)) @db.Uuid
+  userId       String   @unique @db.Uuid
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  permissions  String[] // e.g., ["MANAGE_TENANTS", "MANAGE_PLANS", "VIEW_ANALYTICS", "MANAGE_COMPLIANCE"]
+  isSuperOwner Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TwoFactor {
+  id          String @id @default(uuid(7)) @db.Uuid
+  secret      String
+  backupCodes String
+  userId      String @unique @db.Uuid
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("twoFactor")
 }
 
 model Session {
@@ -321,17 +382,20 @@ model Invitation {
   expiresAt DateTime
 
   @@index([organizationId])
+  @@index([email])
+  @@index([status])
   @@map("invitation")
 }
 
 // ==========================================
-// 7. Employee Master Data
+// 7. Employee Master Data & Lifecycle
 // ==========================================
 model Employee {
   id                  String    @id @default(uuid(7)) @db.Uuid
   fullName            String
   email               String?
   phone               String?
+  address             String?
   nationalIdEncrypted String
   gender              String?
   maritalStatus       String?
@@ -341,9 +405,18 @@ model Employee {
   jobTitle     String
   department   String?
   contractType String   @default("PERMANENT") // PERMANENT, TEMPORARY
-  status       String   @default("ACTIVE") // ACTIVE, ON_LEAVE, TERMINATED
+  status       String   @default("ACTIVE") // ACTIVE, ON_LEAVE, RESIGNED, TERMINATED
   baseSalary   Decimal  @db.Decimal(19, 4)
   hireDate     DateTime
+
+  probationEndDate      DateTime? @db.Date
+  contractEndDate       DateTime? @db.Date
+  terminationDate       DateTime? @db.Date
+  terminationReason     String?
+  overtimeHourlyRate    Decimal?  @db.Decimal(19, 4)
+  socialInsuranceNumber String?
+  isInsured             Boolean   @default(false)
+  insuredSalary         Decimal?  @db.Decimal(19, 4)
 
   // Mandatory Triple Binding
   organizationId String       @db.Uuid
@@ -360,45 +433,135 @@ model Employee {
   userId String? @unique @db.Uuid
   user   User?   @relation(fields: [userId], references: [id])
 
-  documents          EmployeeDocument[]
-  attendanceRecords  AttendanceRecord[]
-  shift              EmployeeShift?
-  shiftExceptions    ShiftException[]
-  overtimeApprovals  OvertimeApproval[]
-  leaveRequests      LeaveRequest[]
-  allowances         EmployeeAllowance[]
-  advances           Advance[]
-  payrollItems       PayrollItem[]
-  taxProfile         TaxProfile?
-  kpiAssignments     KPIGoalAssignment[]
-  kpiResults         KPIResult[]
-  incidents          EmployeeIncident[]
-  performanceReviews PerformanceReview[]
+  documents                EmployeeDocument[]
+  emergencyContacts        EmployeeEmergencyContact[]
+  attendanceRecords        AttendanceRecord[]
+  shift                    EmployeeShift?
+  shiftExceptions          ShiftException[]
+  overtimeApprovals        OvertimeApproval[]
+  leaveRequests            LeaveRequest[]
+  leaveBalances            LeaveBalance[]
+  allowances               EmployeeAllowance[]
+  advances                 Advance[]
+  advanceInstallments      AdvanceInstallment[]
+  payrollItems             PayrollItem[]
+  taxProfiles              TaxProfile[]
+  kpiAssignments           KPIGoalAssignment[]
+  kpiResults               KPIResult[]
+  incidents                EmployeeIncident[]
+  performanceReviews       PerformanceReview[]
+  lifecycleEvents          EmployeeLifecycleEvent[]
+  annualTaxReconciliations AnnualTaxReconciliation[]
+  taxAuditLogs             TaxAuditLog[]
+  notifications            Notification[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([organizationId, branchId])
+  @@index([organizationId, status])
+  @@index([organizationId, department])
   @@index([managerId])
 }
 
-model EmployeeDocument {
-  id             String    @id @default(uuid(7)) @db.Uuid
-  employeeId     String    @db.Uuid
-  employee       Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  documentType   String
-  documentNumber String?
-  issueDate      DateTime? @db.Date
-  expiryDate     DateTime? @db.Date
-  status         String    @default("VALID")
+model EmployeeEmergencyContact {
+  id           String   @id @default(uuid(7)) @db.Uuid
+  employeeId   String   @db.Uuid
+  employee     Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  name         String
+  relationship String
+  phone        String
+  isPrimary    Boolean  @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([employeeId])
+}
+
+model EmployeeLifecycleEvent {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchId       String       @db.Uuid
+  branch         Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  employeeId     String       @db.Uuid
+  employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  eventType     String // HIRED, PROMOTED, SALARY_CHANGED, DEPARTMENT_TRANSFERRED, BRANCH_TRANSFERRED, TERMINATED
+  effectiveDate DateTime @db.Date
+  oldValue      Json?
+  newValue      Json?
+  notes         String?
+
+  createdByUserId String? @db.Uuid
+  createdByUser   User?   @relation(fields: [createdByUserId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([organizationId, employeeId])
+  @@index([organizationId, branchId])
+}
+
+model BulkImportJob {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchId       String?      @db.Uuid
+  branch         Branch?      @relation(fields: [branchId], references: [id], onDelete: SetNull)
+
+  uploadedByUserId String @db.Uuid
+  uploadedByUser   User   @relation(fields: [uploadedByUserId], references: [id], onDelete: Cascade)
+
+  entityType   String // EMPLOYEES, BRANCHES, ATTENDANCE
+  fileName     String
+  totalRows    Int
+  successCount Int
+  errorCount   Int
+  errorsReport Json?
+  status       String @default("COMPLETED") // PROCESSING, COMPLETED, FAILED
+
+  createdAt DateTime @default(now())
+
+  @@index([organizationId, createdAt])
+}
+
+model EmployeeDocument {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchId       String       @db.Uuid
+  branch         Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  employeeId     String       @db.Uuid
+  employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  documentType   String
+  documentNumber String?
+  issueDate      DateTime?    @db.Date
+  expiryDate     DateTime?    @db.Date
+  status         String       @default("VALID")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId, branchId, expiryDate])
 }
 
 // ==========================================
 // 8. Audit & Compliance
 // ==========================================
+/// Statutory baseline rules across countries/categories ("TAX", "INSURANCE", "LABOR_LAW").
+/// Expected `parameters` JSON structure for category "LABOR_LAW":
+/// {
+///   "baseAnnualLeaveDays": 21,           // Standard annual paid leave per Egyptian Labor Law
+///   "extendedAnnualLeaveDays": 30,       // Extended leave upon seniority or age threshold
+///   "seniorityYearsThreshold": 10,       // Minimum consecutive years of service for 30 days
+///   "ageThreshold": 50,                  // Minimum employee age for 30 days
+///   "overtimeMinMultipliers": {
+///     "day": 1.35,                       // 135% daytime statutory minimum
+///     "night": 1.70,                     // 170% nighttime statutory minimum
+///     "holiday": 2.00                    // 200% rest day / official holiday statutory minimum
+///   }
+/// }
 model GlobalComplianceRule {
   id            String    @id @default(uuid(7)) @db.Uuid
   category      String // "TAX", "INSURANCE", "LABOR_LAW"
@@ -418,27 +581,39 @@ model AuditLog {
   user           User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
   organizationId String?       @db.Uuid
   organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  action         String
-  entity         String
-  oldValue       Json?
-  newValue       Json?
-  ipAddress      String?
-  createdAt      DateTime      @default(now())
+  branchId       String?       @db.Uuid
+  branch         Branch?       @relation(fields: [branchId], references: [id], onDelete: SetNull)
+
+  action    String
+  entity    String
+  entityId  String?
+  oldValue  Json?
+  newValue  Json?
+  ipAddress String?
+  createdAt DateTime @default(now())
 
   @@index([organizationId, createdAt])
+  @@index([organizationId, entity, entityId])
 }
 
 // ==========================================
 // 9. Attendance & Leaves
 // ==========================================
-
 model AttendanceSettings {
-  id              String       @id @default(uuid(7)) @db.Uuid
-  organizationId  String       @unique @db.Uuid
-  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  gracePeriodMins Int          @default(15)
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
+  id                  String       @id @default(uuid(7)) @db.Uuid
+  organizationId      String       @unique @db.Uuid
+  organization        Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  gracePeriodMins     Int          @default(15)
+  standardDailyHours  Decimal      @default(8.00) @db.Decimal(4, 2)
+  workingDaysPerMonth Int          @default(30)
+
+  // Organization-level overtime multiplier overrides (Egyptian legal minimums: 1.35, 1.70, 2.00)
+  overtimeDayMultiplier     Decimal @default(1.35) @db.Decimal(4, 2)
+  overtimeNightMultiplier   Decimal @default(1.70) @db.Decimal(4, 2)
+  overtimeHolidayMultiplier Decimal @default(2.00) @db.Decimal(4, 2)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model AttendanceRecord {
@@ -450,17 +625,24 @@ model AttendanceRecord {
   employeeId     String       @db.Uuid
   employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
-  date         DateTime  @db.Date
-  checkIn      DateTime?
-  checkOut     DateTime?
-  status       String // PRESENT, LATE, ABSENT
-  delayMinutes Int       @default(0)
+  date              DateTime        @db.Date
+  checkIn           DateTime?
+  checkOut          DateTime?
+  status            String // PRESENT, LATE, ABSENT
+  delayMinutes      Int             @default(0)
+  earlyLeaveMinutes Int             @default(0)
+  source            String          @default("MANUAL_ADMIN") // MANUAL_ADMIN, SELF_CHECKIN, BIOMETRIC
+  checkedInByUserId String?         @db.Uuid
+  checkedInByUser   User?           @relation("AttendanceChecker", fields: [checkedInByUserId], references: [id], onDelete: SetNull)
+  shiftExceptionId  String?         @db.Uuid
+  shiftException    ShiftException? @relation(fields: [shiftExceptionId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([employeeId, date])
   @@index([organizationId, branchId])
+  @@index([organizationId, date])
 }
 
 model EmployeeShift {
@@ -489,13 +671,34 @@ model ShiftException {
   employeeId     String       @db.Uuid
   employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
-  date      DateTime @db.Date
-  startTime String
-  endTime   String
-  reason    String?
+  date              DateTime           @db.Date
+  startTime         String
+  endTime           String
+  reason            String?
+  attendanceRecords AttendanceRecord[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([employeeId, date])
+  @@index([organizationId, date])
+}
+
+model WeekendConfig {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchId       String       @db.Uuid
+  branch         Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  department  String
+  weekendDays String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([organizationId, branchId, department])
+  @@index([organizationId, branchId])
 }
 
 model DeductionPolicy {
@@ -521,11 +724,15 @@ model OvertimeApproval {
   date             DateTime @db.Date
   hours            Decimal  @db.Decimal(5, 2)
   type             String // DAY, NIGHT, HOLIDAY
-  approvedByUserId String   @db.Uuid
-  approvedByUser   User     @relation("OvertimeApprover", fields: [approvedByUserId], references: [id])
+  status           String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  approvedByUserId String?  @db.Uuid
+  approvedByUser   User?    @relation("OvertimeApprover", fields: [approvedByUserId], references: [id])
+  notes            String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([organizationId, status])
 }
 
 model LeaveRequest {
@@ -540,13 +747,39 @@ model LeaveRequest {
   type      String // ANNUAL, SICK, UNPAID, etc.
   startDate DateTime @db.Date
   endDate   DateTime @db.Date
+  daysCount Decimal  @db.Decimal(5, 2)
   status    String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  notes     String? // for textual sick leave / medical details
 
   approvedByUserId String? @db.Uuid
   approvedByUser   User?   @relation("LeaveApprover", fields: [approvedByUserId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([organizationId, status])
+}
+
+model LeaveBalance {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchId       String       @db.Uuid
+  branch         Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  employeeId     String       @db.Uuid
+  employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  year            Int
+  entitledDays    Decimal @db.Decimal(5, 2) // 21 or 30 per Egyptian Labor Law
+  carriedOverDays Decimal @default(0) @db.Decimal(5, 2)
+  usedDays        Decimal @default(0) @db.Decimal(5, 2)
+  pendingDays     Decimal @default(0) @db.Decimal(5, 2)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([employeeId, year])
+  @@index([organizationId, branchId, year])
 }
 
 model OrganizationHoliday {
@@ -559,23 +792,27 @@ model OrganizationHoliday {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([organizationId, date])
 }
 
 // ==========================================
-// 10. Payroll
+// 10. Payroll, Advances & Social Insurance
 // ==========================================
-
 model AllowanceType {
   id             String       @id @default(uuid(7)) @db.Uuid
   organizationId String       @db.Uuid
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
-  name String
+  name      String
+  isTaxable Boolean @default(true)
 
   employeeAllowances EmployeeAllowance[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([organizationId, name])
 }
 
 model EmployeeAllowance {
@@ -608,26 +845,41 @@ model Advance {
   totalAmount       Decimal  @db.Decimal(19, 4)
   installmentsCount Int
   startDate         DateTime @db.Date
+  status            String   @default("ACTIVE") // ACTIVE, COMPLETED, CANCELED
+  reason            String?
 
   installments AdvanceInstallment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([organizationId, employeeId])
 }
 
 model AdvanceInstallment {
-  id        String  @id @default(uuid(7)) @db.Uuid
-  advanceId String  @db.Uuid
-  advance   Advance @relation(fields: [advanceId], references: [id], onDelete: Cascade)
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchId       String       @db.Uuid
+  branch         Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  employeeId     String       @db.Uuid
+  employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  advanceId      String       @db.Uuid
+  advance        Advance      @relation(fields: [advanceId], references: [id], onDelete: Cascade)
 
   payrollRunId String?     @db.Uuid
   payrollRun   PayrollRun? @relation(fields: [payrollRunId], references: [id])
 
-  amount Decimal @db.Decimal(19, 4)
-  status String  @default("PENDING") // PENDING, PAID
+  dueDate DateTime @db.Date
+  amount  Decimal  @db.Decimal(19, 4)
+  status  String   @default("PENDING") // PENDING, PAID
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([advanceId, status])
+  @@index([dueDate, status])
+  @@index([organizationId, branchId, dueDate, status])
 }
 
 model PayrollRun {
@@ -635,15 +887,29 @@ model PayrollRun {
   organizationId String       @db.Uuid
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
-  cycleDate        DateTime @db.Date
-  status           String   @default("OPEN") // OPEN, CLOSED
-  taxRuleVersionId String?  @db.Uuid // Links to tax rule version used
+  cycleDate DateTime @db.Date
+  status    String   @default("OPEN") // OPEN, CLOSED
+
+  taxRuleVersionId String?         @db.Uuid
+  taxRuleVersion   TaxRuleVersion? @relation(fields: [taxRuleVersionId], references: [id])
+
+  insuranceRuleId String?        @db.Uuid
+  insuranceRule   InsuranceRule? @relation(fields: [insuranceRuleId], references: [id])
+
+  closedAt       DateTime?
+  closedByUserId String?   @db.Uuid
+  closedByUser   User?     @relation("PayrollRunCloser", fields: [closedByUserId], references: [id], onDelete: SetNull)
+  reopenReason   String?
 
   payrollItems        PayrollItem[]
   advanceInstallments AdvanceInstallment[]
+  taxAuditLogs        TaxAuditLog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([organizationId, cycleDate])
+  @@index([organizationId, status])
 }
 
 model PayrollItem {
@@ -657,29 +923,70 @@ model PayrollItem {
   employeeId     String       @db.Uuid
   employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
-  basicSalary Decimal @db.Decimal(19, 4)
-  allowances  Decimal @db.Decimal(19, 4)
-  overtime    Decimal @db.Decimal(19, 4)
-  deductions  Decimal @db.Decimal(19, 4)
-  taxes       Decimal @db.Decimal(19, 4)
-  netSalary   Decimal @db.Decimal(19, 4)
+  basicSalary            Decimal @db.Decimal(19, 4)
+  allowances             Decimal @db.Decimal(19, 4)
+  overtime               Decimal @db.Decimal(19, 4)
+  grossSalary            Decimal @db.Decimal(19, 4)
+  taxableIncome          Decimal @db.Decimal(19, 4)
+  employeeInsurance      Decimal @default(0) @db.Decimal(19, 4)
+  employerInsurance      Decimal @default(0) @db.Decimal(19, 4)
+  solidarityContribution Decimal @default(0) @db.Decimal(19, 4)
+  advanceDeductions      Decimal @default(0) @db.Decimal(19, 4)
+  deductions             Decimal @db.Decimal(19, 4)
+  taxes                  Decimal @db.Decimal(19, 4)
+  netSalary              Decimal @db.Decimal(19, 4)
+
+  // Full deterministic tax calculation breakdown for payslip generation & audit
+  taxBreakdown Json?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([payrollRunId, employeeId])
+  @@index([organizationId, branchId])
+}
+
+model InsuranceRule {
+  id               String    @id @default(uuid(7)) @db.Uuid
+  countryCode      String    @default("EG")
+  versionName      String
+  employeeRate     Decimal   @db.Decimal(5, 2) // e.g. 11.00
+  employerRate     Decimal   @db.Decimal(5, 2) // e.g. 18.75
+  minInsurableWage Decimal   @db.Decimal(19, 4)
+  maxInsurableWage Decimal   @db.Decimal(19, 4)
+  effectiveFrom    DateTime  @db.Date
+  effectiveTo      DateTime? @db.Date
+  isImmutable      Boolean   @default(false)
+
+  payrollRuns   PayrollRun[]
+  organizations Organization[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([countryCode, effectiveFrom])
 }
 
 // ==========================================
-// 11. Taxes
+// 11. Egypt Payroll Tax Engine
 // ==========================================
 model TaxRuleVersion {
-  id            String    @id @default(uuid(7)) @db.Uuid
-  versionName   String
-  effectiveFrom DateTime  @db.Date
-  effectiveTo   DateTime? @db.Date
-  isImmutable   Boolean   @default(false)
+  id             String    @id @default(uuid(7)) @db.Uuid
+  countryCode    String    @default("EG")
+  versionName    String
+  legalReference String?
+  effectiveFrom  DateTime  @db.Date
+  effectiveTo    DateTime? @db.Date
+  isImmutable    Boolean   @default(false)
 
-  taxBrackets TaxBracket[]
-  rulesConfig Json
+  taxBrackets             TaxBracket[]
+  highIncomeRules         HighIncomeRule[]
+  personalExemptionConfig PersonalExemptionConfig?
+  taxDeductionRules       TaxDeductionRule[]
+  taxProfiles             TaxProfile[]
+  rulesConfig             Json
+  payrollRuns             PayrollRun[]
+  taxAuditLogs            TaxAuditLog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -698,25 +1005,177 @@ model TaxBracket {
   updatedAt DateTime @updatedAt
 }
 
-model TaxProfile {
-  id         String   @id @default(uuid(7)) @db.Uuid
-  employeeId String   @unique @db.Uuid
-  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+model HighIncomeRule {
+  id               String         @id @default(uuid(7)) @db.Uuid
+  taxRuleVersionId String         @db.Uuid
+  taxRuleVersion   TaxRuleVersion @relation(fields: [taxRuleVersionId], references: [id], onDelete: Cascade)
 
-  taxStatus        String
-  taxIdNumber      String?
-  taxRuleVersionId String? @db.Uuid
+  thresholdAmount    Decimal   @db.Decimal(19, 4)
+  affectedBracketMin Decimal?  @db.Decimal(19, 4)
+  exemptionTreatment String // FULL, PHASE_OUT, NONE
+  effectiveFrom      DateTime  @db.Date
+  effectiveTo        DateTime? @db.Date
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([taxRuleVersionId])
+}
+
+model PersonalExemptionConfig {
+  id               String         @id @default(uuid(7)) @db.Uuid
+  taxRuleVersionId String         @unique @db.Uuid
+  taxRuleVersion   TaxRuleVersion @relation(fields: [taxRuleVersionId], references: [id], onDelete: Cascade)
+
+  annualAmount   Decimal @db.Decimal(19, 4)
+  allocationMode String  @default("MONTHLY") // ANNUAL, MONTHLY
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model TaxDeductionRule {
+  id               String         @id @default(uuid(7)) @db.Uuid
+  taxRuleVersionId String         @db.Uuid
+  taxRuleVersion   TaxRuleVersion @relation(fields: [taxRuleVersionId], references: [id], onDelete: Cascade)
+
+  deductionType  String // PRIVATE_INSURANCE, SPECIAL_FUNDS, OTHER
+  limitPercent   Decimal? @db.Decimal(5, 2)
+  limitAmount    Decimal? @db.Decimal(19, 4)
+  legalReference String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([taxRuleVersionId])
+}
+
+model TaxProfile {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  employeeId     String       @db.Uuid
+  employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  taxYear                  Int
+  taxStatus                String
+  taxIdNumberEncrypted     String?
+  taxRuleVersionId         String?         @db.Uuid
+  taxRuleVersion           TaxRuleVersion? @relation(fields: [taxRuleVersionId], references: [id], onDelete: SetNull)
+  accumulatedTaxableIncome Decimal         @default(0) @db.Decimal(19, 4)
+  accumulatedTaxPaid       Decimal         @default(0) @db.Decimal(19, 4)
+  privateInsuranceAnnual   Decimal         @default(0) @db.Decimal(19, 4)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([employeeId, taxYear])
+  @@index([organizationId, taxYear])
+}
+
+model TaxableEarningsConfig {
+  id              String       @id @default(uuid(7)) @db.Uuid
+  organizationId  String       @db.Uuid
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  earningCategory String // BASIC, ALLOWANCE, BONUS, OVERTIME, COMMISSION, OTHER
+  isTaxable       Boolean      @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([organizationId, earningCategory])
+}
+
+model FlexibleContribution {
+  id              String        @id @default(uuid(7)) @db.Uuid
+  organizationId  String?       @db.Uuid
+  organization    Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name            String
+  rate            Decimal?      @db.Decimal(6, 4)
+  fixedAmount     Decimal?      @db.Decimal(19, 4)
+  calculationBase String // GROSS_SALARY, NET_SALARY, TAXABLE_INCOME
+  minAmount       Decimal?      @db.Decimal(19, 4)
+  maxAmount       Decimal?      @db.Decimal(19, 4)
+  effectiveFrom   DateTime      @db.Date
+  effectiveTo     DateTime?     @db.Date
+  legalReference  String?
+  isActive        Boolean       @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId, isActive])
+}
+
+model AnnualTaxReconciliation {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchId       String       @db.Uuid
+  branch         Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  employeeId     String       @db.Uuid
+  employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  taxYear            Int
+  projectedAnnualTax Decimal @db.Decimal(19, 4)
+  actualAnnualTax    Decimal @db.Decimal(19, 4)
+  taxAlreadyPaid     Decimal @db.Decimal(19, 4)
+  differenceAmount   Decimal @db.Decimal(19, 4)
+  reason             String
+  status             String  @default("PENDING") // PENDING, SETTLED
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([employeeId, taxYear])
+  @@index([organizationId, taxYear])
+}
+
+model TaxAuditLog {
+  id               String          @id @default(uuid(7)) @db.Uuid
+  organizationId   String          @db.Uuid
+  organization     Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId           String?         @db.Uuid
+  user             User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  employeeId       String?         @db.Uuid
+  employee         Employee?       @relation(fields: [employeeId], references: [id], onDelete: SetNull)
+  payrollRunId     String?         @db.Uuid
+  payrollRun       PayrollRun?     @relation(fields: [payrollRunId], references: [id], onDelete: SetNull)
+  taxRuleVersionId String?         @db.Uuid
+  taxRuleVersion   TaxRuleVersion? @relation(fields: [taxRuleVersionId], references: [id], onDelete: SetNull)
+
+  action    String
+  oldValue  Json?
+  newValue  Json?
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@index([organizationId, createdAt])
+}
+
 // ==========================================
 // 12. KPI & Performance
 // ==========================================
+model KPISettings {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @unique @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  goalsWeightPercent      Decimal @default(70.00) @db.Decimal(5, 2)
+  attendanceWeightPercent Decimal @default(20.00) @db.Decimal(5, 2)
+  incidentsWeightPercent  Decimal @default(10.00) @db.Decimal(5, 2)
+  incidentPenalties       Json    @default("{\"LOW\": 2, \"MEDIUM\": 5, \"HIGH\": 10}")
+  statusThresholds        Json    @default("{\"EXCEEDED\": 110, \"ON_TRACK\": 80, \"NEEDS_ATTENTION\": 60, \"BELOW_TARGET\": 0}")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 model KPITemplate {
-  id              String  @id @default(uuid(7)) @db.Uuid
+  id             String        @id @default(uuid(7)) @db.Uuid
+  organizationId String?       @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
   category        String
   name            String
   description     String?
@@ -725,6 +1184,8 @@ model KPITemplate {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
 }
 
 model KPIGoal {
@@ -740,6 +1201,7 @@ model KPIGoal {
   measurementType String
   targetValue     Decimal @db.Decimal(19, 4)
   weight          Decimal @db.Decimal(5, 2)
+  status          String  @default("ACTIVE") // ACTIVE, ARCHIVED
 
   startDate DateTime @db.Date
   endDate   DateTime @db.Date
@@ -749,6 +1211,8 @@ model KPIGoal {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([organizationId, branchId])
 }
 
 model KPIGoalAssignment {
@@ -769,18 +1233,25 @@ model KPIGoalAssignment {
 }
 
 model KPIResult {
-  id         String   @id @default(uuid(7)) @db.Uuid
-  kpiGoalId  String   @db.Uuid
-  kpiGoal    KPIGoal  @relation(fields: [kpiGoalId], references: [id], onDelete: Cascade)
-  employeeId String   @db.Uuid
-  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branchId       String       @db.Uuid
+  branch         Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  kpiGoalId      String       @db.Uuid
+  kpiGoal        KPIGoal      @relation(fields: [kpiGoalId], references: [id], onDelete: Cascade)
+  employeeId     String       @db.Uuid
+  employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
-  actualValue Decimal  @db.Decimal(19, 4)
-  status      String // EXCEEDED, ON_TRACK, NEEDS_ATTENTION, BELOW_TARGET
-  date        DateTime @db.Date
+  actualValue        Decimal  @db.Decimal(19, 4)
+  achievementPercent Decimal  @db.Decimal(6, 2)
+  status             String // EXCEEDED, ON_TRACK, NEEDS_ATTENTION, BELOW_TARGET
+  date               DateTime @db.Date
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([organizationId, branchId, employeeId])
 }
 
 model EmployeeIncident {
@@ -792,13 +1263,17 @@ model EmployeeIncident {
   employeeId     String       @db.Uuid
   employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
-  date        DateTime @db.Date
-  description String
-  severity    String // LOW, MEDIUM, HIGH
-  status      String   @default("OPEN")
+  date             DateTime @db.Date
+  description      String
+  severity         String // LOW, MEDIUM, HIGH
+  status           String   @default("OPEN")
+  reportedByUserId String?  @db.Uuid
+  reportedByUser   User?    @relation("IncidentReporter", fields: [reportedByUserId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([organizationId, branchId, employeeId])
 }
 
 model PerformanceReview {
@@ -810,21 +1285,24 @@ model PerformanceReview {
   employeeId     String       @db.Uuid
   employee       Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
-  reviewPeriod String
-  overallScore Decimal @db.Decimal(5, 2)
-  status       String  @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, COMPLETED
+  reviewPeriod     String
+  overallScore     Decimal @db.Decimal(5, 2)
+  status           String  @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, COMPLETED
+  strengths        Json?
+  improvementAreas Json?
 
   createdByUserId String @db.Uuid
   createdByUser   User   @relation("ReviewCreator", fields: [createdByUserId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([organizationId, branchId, employeeId])
 }
 
 // ==========================================
 // 13. Notifications
 // ==========================================
-
 model NotificationThreshold {
   id             String       @id @default(uuid(7)) @db.Uuid
   organizationId String       @db.Uuid
@@ -845,13 +1323,66 @@ model Notification {
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   branchId       String?      @db.Uuid
   branch         Branch?      @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  employeeId     String?      @db.Uuid
+  employee       Employee?    @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
-  type     String
-  source   String
-  severity String // CRITICAL, WARNING, INFO
-  status   String @default("NEW") // NEW, READ, RESOLVED
-  message  String
+  type             String
+  source           String
+  severity         String // CRITICAL, WARNING, INFO
+  status           String    @default("NEW") // NEW, READ, RESOLVED
+  message          String
+  resolvedByUserId String?   @db.Uuid
+  resolvedByUser   User?     @relation("NotificationResolver", fields: [resolvedByUserId], references: [id], onDelete: SetNull)
+  resolvedAt       DateTime?
+
+  reads NotificationRead[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([organizationId, status, severity])
+}
+
+model NotificationRead {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  notificationId String       @db.Uuid
+  notification   Notification @relation(fields: [notificationId], references: [id], onDelete: Cascade)
+  userId         String       @db.Uuid
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  readAt         DateTime     @default(now())
+
+  @@unique([notificationId, userId])
+  @@index([userId])
+}
+
+// ==========================================
+// 14. Ovi AI Assistant
+// ==========================================
+model OviConversation {
+  id             String       @id @default(uuid(7)) @db.Uuid
+  organizationId String       @db.Uuid
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String       @db.Uuid
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title          String?
+  messages       OviMessage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId, userId])
+}
+
+model OviMessage {
+  id                   String          @id @default(uuid(7)) @db.Uuid
+  conversationId       String          @db.Uuid
+  conversation         OviConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role                 String // USER, ASSISTANT
+  content              String
+  referencedEntityType String? // EMPLOYEE, BRANCH, PAYROLL_RUN, KPI_GOAL
+  referencedEntityId   String?         @db.Uuid
+
+  createdAt DateTime @default(now())
+
+  @@index([conversationId, createdAt])
 }
